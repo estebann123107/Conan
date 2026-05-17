@@ -7,7 +7,7 @@ body {
   font-family: nunito, sans-serif;
 }
 header {
-  background: url("/Images/wishbonedelux.jpg");
+  background: url("/wishbonedelux.jpg");
   background-size: cover;
   background-position: center;
   height: 90vh;
