@@ -10,7 +10,7 @@ function App() {
     "/Images/SunsetSeason.png",
     "/Images/KidKrow.png",
     "/Images/Superache.png",
-    "https://imgur.com/GvAawqu",
+    "https://i.pinimg.com/736x/0a/b4/f7/0ab4f71b8d47bcb3a47e32c00d20458e.jpg",
     "/Images/Wishbone.png",
   ];
   const nombre = [
