@@ -7,11 +7,11 @@ function App() {
   const id = ["1", "2", "3", "4", "5"];
   const link = ["#", "#", "#", "#", "#"];
   const imagen = [
-    "/Images/SunsetSeason.png",
-    "/Images/KidKrow.png",
-    "/Images/Superache.png",
-    "https://i.pinimg.com/736x/0a/b4/f7/0ab4f71b8d47bcb3a47e32c00d20458e.jpg",
-    "/Images/Wishbone.png",
+    "/SunsetSeason.png",
+    "/KidKrow.png",
+    "/Superache.png",
+    "/FoundHeaven.png",
+    "/Wishbone.png",
   ];
   const nombre = [
     "Sunset Season",
@@ -25,11 +25,7 @@ function App() {
       <div className="App">
         <header>
           <nav>
-            <img
-              src="/Images/Logo.png"
-              alt="Conan Gray Signature"
-              className="logo"
-            />
+            <img src="/Logo.png" alt="Conan Gray Signature" className="logo" />
             <ListNav data={listNav} />
           </nav>
           <div className="HeaderContent">
