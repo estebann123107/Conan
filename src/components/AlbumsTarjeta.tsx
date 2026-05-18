@@ -8,7 +8,7 @@ type Props = {
 export default function AlbumsTarjeta({ id, link, imagen, nombre }: Props) {
   return (
     <div id={id} className="Album">
-      <a href={link}>
+      <a href={`/${link}`}>
         <img src={imagen} alt="Disco" />
         <h3>{nombre}</h3>
       </a>

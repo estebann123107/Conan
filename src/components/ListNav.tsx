@@ -7,7 +7,7 @@ function ListNav({ data }: Props) {
     <ul className="navLinks">
       {data.map((elemento) => (
         <li key={elemento}>
-          <a className="list-group-item" href="#">
+          <a className="list-group-item" href={`/${elemento}`}>
             {elemento}
           </a>
         </li>

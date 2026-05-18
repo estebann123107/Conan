@@ -1,12 +1,17 @@
 import "./App.css";
 import AlbumsTarjeta from "./components/AlbumsTarjeta";
 import ButtonLink from "./components/Button";
-import ListNav from "./components/ListNav";
+import NavBar from "./components/NavBar";
 
 function App() {
-  const listNav = ["Home", "Music", "Tour", "Merch"];
   const id = ["1", "2", "3", "4", "5"];
-  const link = ["", "", "", "", ""];
+  const link = [
+    "SunsetSeason",
+    "KidKrow",
+    "Superache",
+    "FoundHeaven",
+    "Wishbone",
+  ];
   const imagen = [
     "/SunsetSeason.png",
     "/KidKrow.png",
@@ -29,10 +34,7 @@ function App() {
     <>
       <div className="App">
         <header>
-          <nav>
-            <img src="/Logo.png" alt="Conan Gray Signature" className="logo" />
-            <ListNav data={listNav} />
-          </nav>
+          <NavBar />
           <div className="HeaderContent">
             <h1>Wishbone (Deluxe)</h1>
             <h2>out now</h2>
