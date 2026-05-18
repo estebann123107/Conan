@@ -6,7 +6,7 @@ import ListNav from "./components/ListNav";
 function App() {
   const listNav = ["Home", "Music", "Tour", "Merch"];
   const id = ["1", "2", "3", "4", "5"];
-  const link = ["#", "#", "#", "#", "#"];
+  const link = ["", "", "", "", ""];
   const imagen = [
     "/SunsetSeason.png",
     "/KidKrow.png",
