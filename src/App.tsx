@@ -2,6 +2,7 @@ import "./App.css";
 import AlbumsTarjeta from "./components/AlbumsTarjeta";
 import ButtonLink from "./components/Button";
 import NavBar from "./components/NavBar";
+import { Routers } from "./Routers";
 
 function App() {
   const id = ["1", "2", "3", "4", "5"];
@@ -32,6 +33,7 @@ function App() {
 
   return (
     <>
+      <Routers />
       <div className="App">
         <header>
           <NavBar />
