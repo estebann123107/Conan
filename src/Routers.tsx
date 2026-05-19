@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Merch from "./pages/merch";
 import Music from "./pages/music";
-import Tour from "./pages/tour";
+import { Tour } from "./pages/tour";
 import { Home } from "./pages/home";
 import NotFound from "./pages/NotFound";
 export function Routers() {
