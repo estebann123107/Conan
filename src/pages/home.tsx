@@ -4,31 +4,33 @@ import ButtonLink from "../components/Button";
 import NavBar from "../components/NavBar";
 
 export function Home() {
-  const id = ["1", "2", "3", "4", "5"];
-  const link = [
-    "SunsetSeason",
-    "KidKrow",
-    "Superache",
-    "FoundHeaven",
-    "Wishbone",
+  const albums = [
+    {
+      id: "1",
+      Ruta: "SunsetSeason",
+      imagen: "/SunsetSeason.png",
+      nombre: "Sunset Season",
+    },
+    { id: "2", Ruta: "KidKrow", imagen: "/KidKrow.png", nombre: "Kid Krow" },
+    {
+      id: "3",
+      Ruta: "Superache",
+      imagen: "/Superache.png",
+      nombre: "Superache",
+    },
+    {
+      id: "4",
+      Ruta: "FoundHeaven",
+      imagen: "/FoundHeaven.png",
+      nombre: "Found Heaven",
+    },
+    { id: "5", Ruta: "Wishbone", imagen: "/Wishbone.png", nombre: "Wishbone" },
   ];
-  const imagen = [
-    "/SunsetSeason.png",
-    "/KidKrow.png",
-    "/Superache.png",
-    "/FoundHeaven.png",
-    "/Wishbone.png",
-  ];
-  const nombre = [
-    "Sunset Season",
-    "Kid Krow",
-    "Superache",
-    "Found Heaven",
-    "Wishbone",
-  ];
+
   const linkButton = [
     "https://open.spotify.com/intl-es/album/01FqYKXIKnGNh2dqdB4fjD?si=03mSPJcxRiWJvIJ1hx377A",
   ];
+  const contenido = "Listen Now";
   return (
     <>
       <div className="App">
@@ -37,7 +39,7 @@ export function Home() {
           <div className="HeaderContent">
             <h1>Wishbone Deluxe</h1>
             <h2>out now!!</h2>
-            <ButtonLink linkButton={linkButton[0]} />
+            <ButtonLink linkButton={linkButton[0]} contenido={contenido} />
           </div>
         </header>
 
@@ -45,36 +47,15 @@ export function Home() {
           <section className="AlbumsSection">
             <h2>Albums</h2>
             <div id="AlbumsContainer" className="AlbumsContainer">
-              <AlbumsTarjeta
-                id={id[0]}
-                link={link[0]}
-                imagen={imagen[0]}
-                nombre={nombre[0]}
-              />
-              <AlbumsTarjeta
-                id={id[1]}
-                link={link[1]}
-                imagen={imagen[1]}
-                nombre={nombre[1]}
-              />
-              <AlbumsTarjeta
-                id={id[2]}
-                link={link[2]}
-                imagen={imagen[2]}
-                nombre={nombre[2]}
-              />
-              <AlbumsTarjeta
-                id={id[3]}
-                link={link[3]}
-                imagen={imagen[3]}
-                nombre={nombre[3]}
-              />
-              <AlbumsTarjeta
-                id={id[4]}
-                link={link[4]}
-                imagen={imagen[4]}
-                nombre={nombre[4]}
-              />
+              {albums.map((album) => (
+                <AlbumsTarjeta
+                  key={album.id}
+                  id={album.id}
+                  Ruta={album.Ruta}
+                  imagen={album.imagen}
+                  nombre={album.nombre}
+                />
+              ))}
             </div>
           </section>
         </main>
