@@ -9,18 +9,15 @@ export default function Tour() {
   const contenido = "Buy Tickets";
   return (
     <>
-      <div className="App">
+      <header>
         <NavBar />
-        <header>
-          <div className="HeaderContent">
-            <h1>Wishbone World Tour</h1>
-            <ButtonLink linkButton={linkButton[1]} contenido={contenido} />
-          </div>
-        </header>
-
-        <main></main>
-        <footer></footer>
-      </div>
+        <div className="HeaderContent">
+          <h1>Wishbone World Tour</h1>
+          <ButtonLink linkButton={linkButton[1]} contenido={contenido} />
+        </div>
+      </header>
+      <main></main>
+      <footer></footer>
     </>
   );
 }

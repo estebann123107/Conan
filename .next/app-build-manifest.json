@@ -1,40 +1,67 @@
 {
   "pages": {
-    "/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/layout.css",
-      "static/chunks/app/layout.js"
+    "/_not-found/page": [
+      "static/chunks/webpack-c042ca735a68d6ec.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-62c51b5cb8a77e90.js",
+      "static/chunks/main-app-3cc11b2c50f0ad19.js",
+      "static/chunks/app/_not-found/page-f187ad254cc1b0eb.js"
     ],
     "/not-found": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/not-found.js"
+      "static/chunks/webpack-c042ca735a68d6ec.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-62c51b5cb8a77e90.js",
+      "static/chunks/main-app-3cc11b2c50f0ad19.js",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/app/not-found-286f38a7c21e0bd0.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack-c042ca735a68d6ec.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-62c51b5cb8a77e90.js",
+      "static/chunks/main-app-3cc11b2c50f0ad19.js",
+      "static/css/e24b56eb505fb8a8.css",
+      "static/chunks/app/layout-ff3b3c1bfffdc8c5.js"
     ],
     "/home/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/home/page.js"
-    ],
-    "/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
-    ],
-    "/music/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/music/page.js"
-    ],
-    "/tour/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/tour/page.js"
+      "static/chunks/webpack-c042ca735a68d6ec.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-62c51b5cb8a77e90.js",
+      "static/chunks/main-app-3cc11b2c50f0ad19.js",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/app/home/page-cb3dc9235b48bb3b.js"
     ],
     "/merch/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/merch/page.js"
+      "static/chunks/webpack-c042ca735a68d6ec.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-62c51b5cb8a77e90.js",
+      "static/chunks/main-app-3cc11b2c50f0ad19.js",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/app/merch/page-286f38a7c21e0bd0.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-c042ca735a68d6ec.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-62c51b5cb8a77e90.js",
+      "static/chunks/main-app-3cc11b2c50f0ad19.js",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/app/page-cb3dc9235b48bb3b.js"
+    ],
+    "/music/page": [
+      "static/chunks/webpack-c042ca735a68d6ec.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-62c51b5cb8a77e90.js",
+      "static/chunks/main-app-3cc11b2c50f0ad19.js",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/app/music/page-286f38a7c21e0bd0.js"
+    ],
+    "/tour/page": [
+      "static/chunks/webpack-c042ca735a68d6ec.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-62c51b5cb8a77e90.js",
+      "static/chunks/main-app-3cc11b2c50f0ad19.js",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/app/tour/page-cb3dc9235b48bb3b.js"
     ]
   }
 }

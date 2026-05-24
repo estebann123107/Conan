@@ -1,7 +1,8 @@
+import { FC } from "react";
 import ListNav from "./ListNav";
 import Link from "next/link";
 
-function NavBar() {
+const NavBar: FC = () => {
   const listNav = ["Home", "Music", "Tour", "Merch"];
   return (
     <nav>
@@ -11,5 +12,6 @@ function NavBar() {
       <ListNav data={listNav} />
     </nav>
   );
-}
+};
+
 export default NavBar;

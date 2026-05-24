@@ -32,34 +32,32 @@ export default function Home() {
   const contenido = "Listen Now";
   return (
     <>
-      <div className="App">
-        <header>
-          <NavBar />
-          <div className="HeaderContent">
-            <h1>Wishbone Deluxe</h1>
-            <h2>out now!!</h2>
-            <ButtonLink linkButton={linkButton[0]} contenido={contenido} />
-          </div>
-        </header>
+      <header>
+        <NavBar />
+        <div className="HeaderContent">
+          <h1>Wishbone Deluxe</h1>
+          <h2>out now!!</h2>
+          <ButtonLink linkButton={linkButton[0]} contenido={contenido} />
+        </div>
+      </header>
 
-        <main>
-          <section className="AlbumsSection">
-            <h2>Albums</h2>
-            <div id="AlbumsContainer" className="AlbumsContainer">
-              {albums.map((album) => (
-                <AlbumsTarjeta
-                  key={album.id}
-                  id={album.id}
-                  Ruta={album.Ruta}
-                  imagen={album.imagen}
-                  nombre={album.nombre}
-                />
-              ))}
-            </div>
-          </section>
-        </main>
-        <footer></footer>
-      </div>
+      <main>
+        <section className="AlbumsSection">
+          <h2>Albums</h2>
+          <div id="AlbumsContainer" className="AlbumsContainer">
+            {albums.map((album) => (
+              <AlbumsTarjeta
+                key={album.id}
+                id={album.id}
+                Ruta={album.Ruta}
+                imagen={album.imagen}
+                nombre={album.nombre}
+              />
+            ))}
+          </div>
+        </section>
+      </main>
+      <footer></footer>
     </>
   );
 }

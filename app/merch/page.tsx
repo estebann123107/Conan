@@ -2,7 +2,7 @@ import NavBar from "../components/NavBar";
 
 export default function Merch() {
   return (
-    <div className="App">
+    <>
       <header>
         <NavBar />
         <div className="HeaderContent">
@@ -11,6 +11,6 @@ export default function Merch() {
       </header>
       <main></main>
       <footer></footer>
-    </div>
+    </>
   );
 }
