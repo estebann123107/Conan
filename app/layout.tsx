@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
-import { bold } from "next/dist/lib/picocolors";
 
 const nunito = Nunito({
   subsets: ["latin"],
