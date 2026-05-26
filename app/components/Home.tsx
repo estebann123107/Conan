@@ -32,19 +32,22 @@ export default function Home() {
   const contenido = "Listen Now";
   return (
     <>
-      <header>
+      <header className="relative h-[90vh] w-full bg-[url('/wishbonedelux.jpg')] bg-cover bg-center">
         <NavBar />
-        <div className="HeaderContent">
-          <h1>Wishbone Deluxe</h1>
-          <h2>out now!!</h2>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-white">
+          <h1 className="text-[50px] text-brand-dark">Wishbone Deluxe</h1>
+          <h2 className="text-[30px] text-brand">out now!!</h2>
           <ButtonLink linkButton={linkButton[0]} contenido={contenido} />
         </div>
       </header>
 
       <main>
-        <section className="AlbumsSection">
-          <h2>Albums</h2>
-          <div id="AlbumsContainer" className="AlbumsContainer">
+        <section className="my-[60px] mx-2.5 text-center text-white">
+          <h2 className="text-[30px] text-white">Albums</h2>
+          <div
+            id="AlbumsContainer"
+            className="mx-5 my-5 flex flex-col items-center gap-10 md:flex-row md:flex-row md:justify-center"
+          >
             {albums.map((album) => (
               <AlbumsTarjeta
                 key={album.id}
@@ -54,6 +57,18 @@ export default function Home() {
                 nombre={album.nombre}
               />
             ))}
+          </div>
+        </section>
+        <section className="my-[60px] mx-2.5 text-center text-white">
+          <h2 className="text-[30px] text-white">Singles</h2>
+          <div id="SinglesContainer" className="mx-5 my-5 flex flex-row gap-5">
+            <div
+              id="Single"
+              className="h-[200px] w-full rounded-[10px] flex flex-col items-center justify-center"
+            >
+              <img src="/Wishbone.png" alt="Wishbone" className="w-[200px]" />
+              <h3>Wishbone</h3>
+            </div>
           </div>
         </section>
       </main>

@@ -9,10 +9,10 @@ export default function Tour() {
   const contenido = "Buy Tickets";
   return (
     <>
-      <header>
+      <header className="relative h-[90vh] w-full bg-[url('/wishbonedelux.jpg')] bg-cover bg-center">
         <NavBar />
-        <div className="HeaderContent">
-          <h1>Wishbone World Tour</h1>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-white">
+          <h1 className="text-[50px] text-brand-dark">Wishbone World Tour</h1>
           <ButtonLink linkButton={linkButton[1]} contenido={contenido} />
         </div>
       </header>
