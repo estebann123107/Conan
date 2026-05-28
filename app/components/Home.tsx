@@ -43,10 +43,12 @@ export default function Home() {
 
       <main>
         <section className="my-[60px] mx-2.5 text-center text-white">
-          <h2 className="text-[30px] text-white">Albums</h2>
+          <h2 className="text-[30px] text-white md:text-[40px] mb-10">
+            Albums
+          </h2>
           <div
             id="AlbumsContainer"
-            className="mx-5 my-5 flex flex-col items-center gap-10 md:flex-row md:flex-row md:justify-center"
+            className="mx-5 my-5 flex flex-col items-center gap-10 md:flex md:flex-row md:justify-center md:gap-10"
           >
             {albums.map((album) => (
               <AlbumsTarjeta
