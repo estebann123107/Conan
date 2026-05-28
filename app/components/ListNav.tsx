@@ -29,7 +29,7 @@ export const MobileNavMenu: FC<Props> = ({ data, isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-x-0 top-[69px] z-[14] border-t  bg-[rgba(83,130,172,0.171)] backdrop-blur-md md:hidden">
+    <div className="fixed inset-x-0 top-[69px] z-14 border-t  bg-[rgba(83,130,172,0.171)] backdrop-blur-md md:hidden">
       <ul className="flex list-none flex-col items-center gap-5 py-5">
         {data.map((elemento) => (
           <li key={elemento}>

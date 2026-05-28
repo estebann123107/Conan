@@ -33,7 +33,7 @@ const NavBar: FC = () => {
               className={`block h-[3px] w-[25px] bg-white transition-opacity duration-300 ${isOpen ? "opacity-0" : ""}`}
             />
             <span
-              className={`block h-[3px] w-[25px] bg-white transition-transform duration-300 ${isOpen ? "-translate-y-[7px] -rotate-45" : ""}`}
+              className={`block h-[3px] w-[25px] bg-white transition-transform duration-300 ${isOpen ? "translate-y-[-7px] -rotate-45" : ""}`}
             />
           </button>
         </div>
