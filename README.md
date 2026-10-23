@@ -34,7 +34,7 @@ npm start
 
 ## Features
 
-- Built with Next.js 15
+- Built with Next.js 16
 - TypeScript support
 - Responsive design
 - Modern React patterns

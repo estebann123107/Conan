@@ -11,7 +11,7 @@ const navLinkClass =
   "text-lg text-white no-underline transition-colors duration-300 hover:text-brand";
 
 export const DesktopNavLinks: FC<Pick<Props, "data">> = ({ data }) => (
-  <ul className="mr-[100px] hidden list-none gap-5 md:flex">
+  <ul className="mr-4 hidden list-none gap-5 md:flex lg:mr-[50px]">
     {data.map((elemento) => (
       <li key={elemento}>
         <Link
@@ -29,7 +29,7 @@ export const MobileNavMenu: FC<Props> = ({ data, isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-x-0 top-[69px] z-14 border-t  bg-[rgba(83,130,172,0.171)] backdrop-blur-md md:hidden">
+    <div className="fixed inset-x-0 top-[69px] z-14 border-t border-white/10 bg-[rgba(83,130,172,0.171)] backdrop-blur-md md:hidden">
       <ul className="flex list-none flex-col items-center gap-5 py-5">
         {data.map((elemento) => (
           <li key={elemento}>
@@ -42,6 +42,24 @@ export const MobileNavMenu: FC<Props> = ({ data, isOpen, onClose }) => {
             </Link>
           </li>
         ))}
+        <li>
+          <Link
+            href="/login"
+            className={navLinkClass}
+            onClick={onClose}
+          >
+            Iniciar sesión
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/register"
+            className={navLinkClass}
+            onClick={onClose}
+          >
+            Registrarse
+          </Link>
+        </li>
       </ul>
     </div>
   );
