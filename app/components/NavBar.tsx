@@ -3,6 +3,7 @@
 import { type FC, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { createPortal } from "react-dom";
 import { DesktopNavLinks, MobileNavMenu } from "./ListNav";
 
 const UserIcon: FC = () => (
@@ -26,8 +27,13 @@ const NavBar: FC = () => {
   const listNav = ["Home", "Music", "Tour", "Merch"];
   const [isOpen, setIsOpen] = useState(false);
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
+  const [accountMenuPosition, setAccountMenuPosition] = useState<{
+    top: number;
+    right: number;
+  } | null>(null);
   const accountMenuRef = useRef<HTMLDivElement>(null);
   const accountButtonRef = useRef<HTMLButtonElement>(null);
+  const accountMenuPortalRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!isAccountMenuOpen) return;
@@ -35,7 +41,8 @@ const NavBar: FC = () => {
     const handlePointerDown = (event: PointerEvent) => {
       if (
         event.target instanceof Node &&
-        !accountMenuRef.current?.contains(event.target)
+        !accountMenuRef.current?.contains(event.target) &&
+        !accountMenuPortalRef.current?.contains(event.target)
       ) {
         setIsAccountMenuOpen(false);
       }
@@ -55,6 +62,25 @@ const NavBar: FC = () => {
       document.removeEventListener("pointerdown", handlePointerDown);
       document.removeEventListener("keydown", handleKeyDown);
     };
+  }, [isAccountMenuOpen]);
+
+  useEffect(() => {
+    if (!isAccountMenuOpen) return;
+
+    const updatePosition = () => {
+      const button = accountButtonRef.current;
+      if (!button) return;
+
+      const buttonRect = button.getBoundingClientRect();
+      setAccountMenuPosition({
+        top: buttonRect.bottom + 20,
+        right: window.innerWidth - buttonRect.right,
+      });
+    };
+
+    updatePosition();
+    window.addEventListener("resize", updatePosition);
+    return () => window.removeEventListener("resize", updatePosition);
   }, [isAccountMenuOpen]);
 
   return (
@@ -78,6 +104,7 @@ const NavBar: FC = () => {
               className="flex h-10 w-10 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               onClick={() => {
                 setIsAccountMenuOpen((open) => !open);
+                setAccountMenuPosition(null);
                 setIsOpen(false);
               }}
               aria-label="Abrir opciones de cuenta"
@@ -86,28 +113,6 @@ const NavBar: FC = () => {
             >
               <UserIcon />
             </button>
-            {isAccountMenuOpen && (
-              <nav
-                id="account-menu"
-                aria-label="Opciones de cuenta"
-                className="absolute right-0 top-full z-[9999] mt-2 w-48 overflow-hidden rounded-lg bg-[rgba(28,38,47,0.98)] py-2 shadow-xl backdrop-blur-md"
-              >
-                <Link
-                  href="/login"
-                  className="block px-4 py-3 text-sm text-white transition-colors hover:bg-white/10 focus-visible:bg-white/10 focus-visible:outline-none"
-                  onClick={() => setIsAccountMenuOpen(false)}
-                >
-                  Iniciar sesión
-                </Link>
-                <Link
-                  href="/register"
-                  className="block px-4 py-3 text-sm text-white transition-colors hover:bg-white/10 focus-visible:bg-white/10 focus-visible:outline-none"
-                  onClick={() => setIsAccountMenuOpen(false)}
-                >
-                  Registrarse
-                </Link>
-              </nav>
-            )}
           </div>
           <button
             type="button"
@@ -138,6 +143,33 @@ const NavBar: FC = () => {
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
       />
+      {isAccountMenuOpen &&
+        accountMenuPosition &&
+        createPortal(
+          <nav
+            ref={accountMenuPortalRef}
+            id="account-menu"
+            aria-label="Opciones de cuenta"
+            className="fixed z-[9999] w-48 overflow-hidden rounded-lg bg-[rgba(83,130,172,0.171)] py-2 shadow-xl backdrop-blur-md"
+            style={accountMenuPosition}
+          >
+            <Link
+              href="/login"
+              className="block px-4 py-3 text-sm text-white transition-colors hover:text-brand focus-visible:bg-white/10 focus-visible:outline-none"
+              onClick={() => setIsAccountMenuOpen(false)}
+            >
+              Iniciar sesión
+            </Link>
+            <Link
+              href="/register"
+              className="block px-4 py-3 text-sm text-white transition-colors hover:text-brand focus-visible:bg-white/10 focus-visible:outline-none"
+              onClick={() => setIsAccountMenuOpen(false)}
+            >
+              Registrarse
+            </Link>
+          </nav>,
+          document.body,
+        )}
     </>
   );
 };
