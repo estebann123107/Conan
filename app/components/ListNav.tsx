@@ -11,7 +11,7 @@ const navLinkClass =
   "text-lg text-white no-underline transition-colors duration-300 hover:text-brand";
 
 export const DesktopNavLinks: FC<Pick<Props, "data">> = ({ data }) => (
-  <ul className="mr-[100px] hidden list-none gap-5 md:flex">
+  <ul className="mr-5 hidden list-none gap-5 md:flex">
     {data.map((elemento) => (
       <li key={elemento}>
         <Link
