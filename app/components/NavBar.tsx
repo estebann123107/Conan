@@ -1,8 +1,26 @@
 "use client";
 
-import { FC, useEffect, useRef, useState } from "react";
-import { DesktopNavLinks, MobileNavMenu } from "./ListNav";
+import { type FC, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import { DesktopNavLinks, MobileNavMenu } from "./ListNav";
+
+const UserIcon: FC = () => (
+  <svg
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    fill="none"
+    className="h-6 w-6"
+  >
+    <circle cx="12" cy="8" r="3.5" stroke="currentColor" strokeWidth="1.8" />
+    <path
+      d="M5.5 20a6.5 6.5 0 0 1 13 0"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+    />
+  </svg>
+);
 
 const NavBar: FC = () => {
   const listNav = ["Home", "Music", "Tour", "Merch"];
@@ -42,17 +60,58 @@ const NavBar: FC = () => {
   return (
     <>
       <nav className="fixed z-20 flex w-full items-center justify-between bg-[rgba(83,130,172,0.171)] p-2.5 backdrop-blur-[10px]">
-        <Link href="/">
-          <img
+        <Link href="/" aria-label="Conan Gray, inicio">
+          <Image
             src="/Logo.png"
             alt="Conan Gray Signature"
-            className="ml-3 h-[50px] w-[50px] md:ml-[50px]"
+            width={50}
+            height={50}
+            className="ml-4 h-[50px] w-[50px] md:ml-[50px]"
           />
         </Link>
-        <div className="flex items-center">
+        <div className="flex items-center gap-2 md:gap-4">
           <DesktopNavLinks data={listNav} />
+          <div className="relative z-50 mr-3 md:mr-[10px]" ref={accountMenuRef}>
+            <button
+              ref={accountButtonRef}
+              type="button"
+              className="flex h-10 w-10 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              onClick={() => {
+                setIsAccountMenuOpen((open) => !open);
+                setIsOpen(false);
+              }}
+              aria-label="Abrir opciones de cuenta"
+              aria-expanded={isAccountMenuOpen}
+              aria-controls="account-menu"
+            >
+              <UserIcon />
+            </button>
+            {isAccountMenuOpen && (
+              <nav
+                id="account-menu"
+                aria-label="Opciones de cuenta"
+                className="absolute right-0 top-full z-[9999] mt-2 w-48 overflow-hidden rounded-lg bg-[rgba(28,38,47,0.98)] py-2 shadow-xl backdrop-blur-md"
+              >
+                <Link
+                  href="/login"
+                  className="block px-4 py-3 text-sm text-white transition-colors hover:bg-white/10 focus-visible:bg-white/10 focus-visible:outline-none"
+                  onClick={() => setIsAccountMenuOpen(false)}
+                >
+                  Iniciar sesión
+                </Link>
+                <Link
+                  href="/register"
+                  className="block px-4 py-3 text-sm text-white transition-colors hover:bg-white/10 focus-visible:bg-white/10 focus-visible:outline-none"
+                  onClick={() => setIsAccountMenuOpen(false)}
+                >
+                  Registrarse
+                </Link>
+              </nav>
+            )}
+          </div>
           <button
-            className="relative z-20 mr-3 flex flex-col gap-1.5 md:hidden"
+            type="button"
+            className="relative z-20 mr-4 flex flex-col gap-1.5 md:hidden"
             onClick={() => {
               setIsOpen((open) => !open);
               setIsAccountMenuOpen(false);
@@ -72,63 +131,6 @@ const NavBar: FC = () => {
               className={`block h-[3px] w-[25px] bg-white transition-transform duration-300 ${isOpen ? "translate-y-[-7px] -rotate-45" : ""}`}
             />
           </button>
-          <div className="relative mr-3 md:mr-[10px]" ref={accountMenuRef}>
-            <button
-              ref={accountButtonRef}
-              type="button"
-              className="flex h-10  w-10 items-center justify-center rounded-full text-white transition-colors hover:bg-white/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-              onClick={() => {
-                setIsAccountMenuOpen((open) => !open);
-                setIsOpen(false);
-              }}
-              aria-label="Abrir opciones de cuenta"
-              aria-expanded={isAccountMenuOpen}
-              aria-controls="account-menu"
-            >
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                fill="none"
-                className="h-6 w-6"
-              >
-                <circle
-                  cx="12"
-                  cy="8"
-                  r="3.5"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                />
-                <path
-                  d="M5.5 20a6.5 6.5 0 0 1 13 0"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </button>
-            {isAccountMenuOpen && (
-              <nav
-                id="account-menu"
-                aria-label="Opciones de cuenta"
-                className="absolute right-0 top-full z-30 mt-[20px] w-52 overflow-hidden rounded-lg border border-transparent bg-brand-dark/95 py-2 shadow-lg backdrop-blur-md"
-              >
-                <Link
-                  href="/login"
-                  className="block px-4 py-3 text-sm text-white transition-colors hover:text-brand focus-visible:bg-white/10 focus-visible:outline-none"
-                  onClick={() => setIsAccountMenuOpen(false)}
-                >
-                  Iniciar sesión
-                </Link>
-                <Link
-                  href="/register"
-                  className="block px-4 py-3 text-sm text-white transition-colors hover:text-brand focus-visible:bg-white/10 focus-visible:outline-none"
-                  onClick={() => setIsAccountMenuOpen(false)}
-                >
-                  Registrarse
-                </Link>
-              </nav>
-            )}
-          </div>
         </div>
       </nav>
       <MobileNavMenu
