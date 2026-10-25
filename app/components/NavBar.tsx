@@ -97,7 +97,10 @@ const NavBar: FC = () => {
         </Link>
         <div className="flex items-center gap-2 md:gap-4">
           <DesktopNavLinks data={listNav} />
-          <div className="relative z-50 mr-3 md:mr-[10px]" ref={accountMenuRef}>
+          <div
+            className="relative z-50 mr-3 hidden md:block md:mr-[10px]"
+            ref={accountMenuRef}
+          >
             <button
               ref={accountButtonRef}
               type="button"
@@ -150,7 +153,7 @@ const NavBar: FC = () => {
             ref={accountMenuPortalRef}
             id="account-menu"
             aria-label="Opciones de cuenta"
-            className="fixed z-[9999] w-48 overflow-hidden rounded-lg bg-[rgba(83,130,172,0.171)] py-2 shadow-xl backdrop-blur-md"
+            className="fixed z-[9999] w-30 overflow-hidden rounded-lg bg-[rgba(83,130,172,0.171)] py-2 shadow-xl backdrop-blur-md"
             style={accountMenuPosition}
           >
             <Link
