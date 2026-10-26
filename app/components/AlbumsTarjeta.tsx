@@ -11,7 +11,7 @@ export default function AlbumsTarjeta({ id, Ruta, imagen, nombre }: Props) {
   return (
     <div
       id={id}
-      className="h-[200px] w-full rounded-[10px] flex flex-col items-center justify-center"
+      className="h-[auto] w-[200px] shrink-0 rounded-[10px] flex flex-col items-center justify-center md:w-full md:shrink"
     >
       <Link
         href={`/${Ruta}`}

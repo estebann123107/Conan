@@ -48,7 +48,7 @@ export default function Home() {
           </h2>
           <div
             id="AlbumsContainer"
-            className="mx-5 my-5 flex flex-col items-center gap-10 md:flex md:flex-row md:justify-center md:gap-10"
+            className="ml-5 my-5 flex flex-nowrap flex-row items-center gap-10 overflow-x-auto scrollbar-hide md:justify-center"
           >
             {albums.map((album) => (
               <AlbumsTarjeta
