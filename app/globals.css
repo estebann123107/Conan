@@ -3,6 +3,7 @@
 @theme {
   --color-brand-dark: #012c42;
   --color-brand: #457490;
+  --color-brand-light: #6ba3c4;
   --color-site-bg: #1c262f;
 }
 
@@ -13,4 +14,19 @@
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+@keyframes menuItemFadeSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-menu-item {
+  animation: menuItemFadeSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
