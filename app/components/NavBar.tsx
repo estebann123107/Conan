@@ -120,7 +120,7 @@ const NavBar: FC = () => {
               role="menu"
               aria-label="Opciones de cuenta"
               aria-hidden={!isAccountMenuOpen}
-              className={`absolute right-0 top-full mt-2.5 w-48 origin-top-right overflow-hidden rounded-2xl border border-white/15 bg-[#1c262f]/95 p-1.5 shadow-2xl backdrop-blur-xl transition-all duration-200 ease-out ${
+              className={`absolute right-0 top-full mt-4 w-48 origin-top-right overflow-hidden rounded-2xl border border-white/15 bg-[#1c262f]/95 p-1.5 shadow-2xl backdrop-blur-xl transition-all duration-200 ease-out ${
                 isAccountMenuOpen
                   ? "pointer-events-auto visible scale-100 opacity-100 translate-y-0"
                   : "pointer-events-none invisible scale-95 opacity-0 -translate-y-2"

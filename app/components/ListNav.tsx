@@ -78,7 +78,7 @@ export const MobileNavMenu: FC<Props> = ({ data, isOpen, onClose }) => {
         role="region"
         aria-label="Menú de navegación móvil"
         aria-hidden={!isOpen}
-        className={`fixed inset-x-0 top-[74px] z-30 px-4 md:hidden transition-all duration-300 ease-out ${
+        className={`fixed inset-x-0 top-[88px] z-30 px-4 md:hidden transition-all duration-300 ease-out ${
           isOpen
             ? "pointer-events-auto visible scale-100 opacity-100 translate-y-0"
             : "pointer-events-none invisible scale-95 opacity-0 -translate-y-3"
