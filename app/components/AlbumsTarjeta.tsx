@@ -19,11 +19,10 @@ export type AlbumData = {
 
 type Props = {
   album: AlbumData;
-  isSelected?: boolean;
   onSelect?: (album: AlbumData) => void;
 };
 
-export default function AlbumsTarjeta({ album, isSelected, onSelect }: Props) {
+export default function AlbumsTarjeta({ album, onSelect }: Props) {
   return (
     <div
       onClick={() => onSelect?.(album)}

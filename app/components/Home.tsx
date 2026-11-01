@@ -304,7 +304,6 @@ export default function Home() {
                 <AlbumsTarjeta
                   key={album.id}
                   album={album}
-                  isSelected={selectedAlbum.id === album.id}
                   onSelect={(alb) => {
                     setSelectedAlbum(alb);
                     setCurrentTrackIndex(0);
