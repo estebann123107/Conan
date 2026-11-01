@@ -173,48 +173,12 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative h-[560px] w-full overflow-hidden">
-        {/* Cielo Degradado */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0c1a2e] via-[#17304a] via-[48%] to-[#22405a]" />
+        {/* Imagen de fondo real wishbonedelux.jpg */}
+        <div className="absolute inset-0 bg-[url('/wishbonedelux.jpg')] bg-cover bg-center" />
 
-        {/* Textura sutil con la imagen wishbonedelux.jpg de main */}
-        <div className="absolute inset-0 bg-[url('/wishbonedelux.jpg')] bg-cover bg-center opacity-15 mix-blend-overlay pointer-events-none" />
-
-        {/* Resplandor decorativo de la luna */}
-        <div className="absolute -top-[130px] right-[50px] md:right-[160px] lg:left-[770px] size-[620px] pointer-events-none opacity-90">
-          <Image
-            src="/figma-assets/hero-resplandor.svg"
-            alt=""
-            width={620}
-            height={620}
-            className="size-full object-contain"
-            priority
-          />
-        </div>
-
-        {/* Luna dorada */}
-        <div className="absolute top-[120px] right-[80px] md:right-[200px] lg:left-[1030px] size-[120px] pointer-events-none drop-shadow-[0_0_35px_rgba(212,175,55,0.7)]">
-          <Image
-            src="/figma-assets/hero-luna.svg"
-            alt=""
-            width={120}
-            height={120}
-            className="size-full object-contain"
-            priority
-          />
-        </div>
-
-        {/* Olas sutiles */}
-        <div className="absolute top-[160px] left-0 right-0 h-[400px] pointer-events-none">
-          <Image
-            src="/figma-assets/hero-olas.svg"
-            alt=""
-            fill
-            className="size-full object-cover object-bottom"
-          />
-        </div>
-
-        {/* Degradado a abismo (#09101a) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent via-[38%] to-[#09101a] pointer-events-none" />
+        {/* Degradados cinematográficos para fusionar con el fondo oscuro y resaltar la tipografía */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#09101a]/95 via-[#09101a]/70 via-55% to-[#09101a]/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#09101a] via-[#09101a]/30 via-40% to-[#09101a]/40" />
 
         {/* Texto del Hero */}
         <div className="relative z-10 mx-auto flex h-full max-w-[1440px] flex-col justify-center px-6 sm:px-10 lg:px-[160px]">
