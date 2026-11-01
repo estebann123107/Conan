@@ -66,10 +66,10 @@ export default function Reproductor({
       aria-label="Reproductor de música"
       className="fixed bottom-4 left-0 right-0 z-40 flex justify-center px-4 pointer-events-none"
     >
-      <div className="pointer-events-auto flex w-full max-w-[960px] items-center justify-between gap-3 sm:gap-4 md:gap-[18px] rounded-[20px] border border-[#8da3b5]/30 bg-[#162032]/95 px-3 sm:px-4 md:px-[18px] py-[12px] shadow-[0px_20px_50px_-12px_rgba(0,0,0,0.7)] backdrop-blur-[9px]">
+      <div className="pointer-events-auto flex w-full max-w-[960px] items-center justify-between gap-2 sm:gap-4 md:gap-[18px] rounded-[20px] border border-[#8da3b5]/30 bg-[#162032]/95 px-2 sm:px-4 md:px-[18px] py-[12px] shadow-[0px_20px_50px_-12px_rgba(0,0,0,0.7)] backdrop-blur-[9px]">
         {/* Ahora suena con imagen real */}
-        <div className="flex h-[46px] w-[180px] sm:w-[220px] md:w-[250px] shrink-0 items-center gap-[12px]">
-          <div className="relative size-[46px] shrink-0 overflow-hidden rounded-[6px] border border-white/10 shadow-md">
+        <div className="flex h-[46px] min-w-0 flex-1 items-center gap-2 max-[360px]:gap-1 sm:w-[220px] sm:flex-none sm:gap-[12px] md:w-[250px]">
+          <div className="relative size-[36px] shrink-0 overflow-hidden rounded-[6px] border border-white/10 shadow-md max-[360px]:size-[28px] sm:size-[46px]">
             <Image
               src={albumCover}
               alt={albumName}
@@ -78,7 +78,7 @@ export default function Reproductor({
               className="object-cover"
             />
           </div>
-          <div className="min-w-0 flex-1 leading-normal">
+          <div className="min-w-0 flex-1 overflow-hidden leading-normal">
             <p className="truncate font-serif text-[14px] sm:text-[16px] font-medium text-[#f0f4f8]">
               {currentTrack.title}
             </p>
@@ -89,13 +89,13 @@ export default function Reproductor({
         </div>
 
         {/* Controles centrales y Onda */}
-        <div className="flex flex-1 flex-col items-center gap-[6px] min-w-0">
+        <div className="flex min-w-0 flex-none flex-col items-center gap-[6px] sm:flex-1">
           {/* Botones */}
-          <div className="flex items-center gap-[10px]">
+          <div className="flex items-center gap-1 sm:gap-[10px]">
             <button
               type="button"
               onClick={onPrev}
-              className="flex size-[36px] items-center justify-center rounded-full text-[#8da3b5] transition-all md:hover:bg-white/10 md:hover:text-white active:scale-95 cursor-pointer"
+              className="flex size-[30px] items-center justify-center rounded-full text-[#8da3b5] transition-all sm:size-[36px] md:hover:bg-white/10 md:hover:text-white active:scale-95 cursor-pointer"
               aria-label="Pista anterior"
             >
               <div className="relative size-[18px] shrink-0">
@@ -112,7 +112,7 @@ export default function Reproductor({
             <button
               type="button"
               onClick={onTogglePlay}
-              className="flex size-[44px] items-center justify-center rounded-full bg-[#457490] text-[#09101a] shadow-[0px_0px_22px_0px_rgba(69,116,144,0.55)] transition-all md:hover:scale-105 active:scale-95 cursor-pointer"
+              className="flex size-[38px] items-center justify-center rounded-full bg-[#457490] text-[#09101a] shadow-[0px_0px_22px_0px_rgba(69,116,144,0.55)] transition-all sm:size-[44px] md:hover:scale-105 active:scale-95 cursor-pointer"
               aria-label={isPlaying ? "Pausar" : "Reproducir"}
             >
               <div className="relative size-[18px] shrink-0">
@@ -133,7 +133,7 @@ export default function Reproductor({
             <button
               type="button"
               onClick={onNext}
-              className="flex size-[36px] items-center justify-center rounded-full text-[#8da3b5] transition-all md:hover:bg-white/10 md:hover:text-white active:scale-95 cursor-pointer"
+              className="flex size-[30px] items-center justify-center rounded-full text-[#8da3b5] transition-all sm:size-[36px] md:hover:bg-white/10 md:hover:text-white active:scale-95 cursor-pointer"
               aria-label="Pista siguiente"
             >
               <div className="relative size-[18px] shrink-0">
@@ -191,7 +191,7 @@ export default function Reproductor({
         <button
           type="button"
           onClick={onToggleSave}
-          className="flex size-[36px] shrink-0 items-center justify-center rounded-full text-[#8da3b5] transition-all md:hover:bg-white/10 md:hover:scale-105 active:scale-95 cursor-pointer"
+          className="flex size-[32px] shrink-0 items-center justify-center rounded-full text-[#8da3b5] transition-all sm:size-[36px] md:hover:bg-white/10 md:hover:scale-105 active:scale-95 cursor-pointer"
           aria-label={isSaved ? "Quitar de guardados" : "Guardar en favoritos"}
         >
           <div className="relative size-[20px] shrink-0">
