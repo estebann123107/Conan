@@ -100,7 +100,6 @@ export default function Home() {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [savedTrackIds, setSavedTrackIds] = useState<Set<number>>(new Set([2]));
-  const [carouselIndex, setCarouselIndex] = useState(0);
   const [showLeftFade, setShowLeftFade] = useState(false);
   const [showRightFade, setShowRightFade] = useState(false);
 
@@ -178,16 +177,18 @@ export default function Home() {
   };
 
   const scrollCarousel = (direction: "left" | "right") => {
-    if (!carouselRef.current) return;
-    const cardWidth = 228;
-    const newIndex =
-      direction === "left"
-        ? Math.max(0, carouselIndex - 1)
-        : Math.min(INITIAL_ALBUMS.length - 1, carouselIndex + 1);
+    const carousel = carouselRef.current;
+    const firstCard = carousel?.firstElementChild;
+    if (!carousel || !firstCard) return;
 
-    setCarouselIndex(newIndex);
-    carouselRef.current.scrollTo({
-      left: newIndex * cardWidth,
+    const secondCard = firstCard.nextElementSibling;
+    const cardStep = secondCard
+      ? secondCard.getBoundingClientRect().left -
+        firstCard.getBoundingClientRect().left
+      : firstCard.getBoundingClientRect().width;
+
+    carousel.scrollBy({
+      left: direction === "left" ? -cardStep : cardStep,
       behavior: "smooth",
     });
   };
@@ -248,17 +249,14 @@ export default function Home() {
               Albums
             </h2>
             <div className="flex items-center gap-[10px]">
-              <span className="text-[13px] font-normal text-[#8da3b5]">
-                {carouselIndex + 1} / {INITIAL_ALBUMS.length}
-              </span>
               <button
                 type="button"
                 onClick={() => scrollCarousel("left")}
-                disabled={carouselIndex === 0}
+                disabled={!showLeftFade}
                 className={`flex size-[40px] items-center justify-center rounded-full border border-[#8da3b5]/40 bg-[#162032] transition-all ${
-                  carouselIndex === 0
+                  !showLeftFade
                     ? "opacity-35 cursor-not-allowed"
-                    : "hover:bg-white/10 active:scale-95 cursor-pointer"
+                    : "md:hover:bg-white/10 active:scale-95 cursor-pointer"
                 }`}
                 aria-label="Álbum anterior"
               >
@@ -275,11 +273,11 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => scrollCarousel("right")}
-                disabled={carouselIndex >= INITIAL_ALBUMS.length - 1}
+                disabled={!showRightFade}
                 className={`flex size-[40px] items-center justify-center rounded-full border border-[#8da3b5]/40 bg-[#162032] transition-all ${
-                  carouselIndex >= INITIAL_ALBUMS.length - 1
+                  !showRightFade
                     ? "opacity-35 cursor-not-allowed"
-                    : "hover:bg-white/10 active:scale-95 cursor-pointer"
+                    : "md:hover:bg-white/10 active:scale-95 cursor-pointer"
                 }`}
                 aria-label="Álbum siguiente"
               >
@@ -300,7 +298,7 @@ export default function Home() {
           <div className="relative">
             <div
               ref={carouselRef}
-              className="flex items-start gap-[20px] overflow-x-auto scrollbar-hide pb-2"
+              className="flex snap-x snap-mandatory items-start gap-[20px] overflow-x-auto scrollbar-hide pb-2"
             >
               {INITIAL_ALBUMS.map((album) => (
                 <AlbumsTarjeta
@@ -313,6 +311,10 @@ export default function Home() {
                   }}
                 />
               ))}
+              <div
+                aria-hidden="true"
+                className="w-[max(0px,calc(100%-228px))] shrink-0"
+              />
             </div>
             {showLeftFade && (
               <div

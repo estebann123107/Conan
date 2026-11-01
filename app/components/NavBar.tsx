@@ -76,7 +76,7 @@ const NavBar: FC<NavBarProps> = ({ savedCount = 1 }) => {
         {/* Brand */}
         <Link
           href="/"
-          className="flex items-center gap-[10px] no-underline transition-opacity hover:opacity-90"
+          className="flex items-center gap-[10px] no-underline transition-opacity md:hover:opacity-90"
           aria-label="Conan Gray inicio"
         >
           <div className="relative size-[30px] shrink-0">
@@ -103,7 +103,7 @@ const NavBar: FC<NavBarProps> = ({ savedCount = 1 }) => {
                 className={`flex items-center gap-[7px] rounded-full px-[12px] py-[8px] text-[15px] font-medium no-underline transition-all duration-200 ${
                   isActive
                     ? "bg-[#457490]/15 text-[#457490] border border-[#457490]/35 shadow-xs"
-                    : "text-[#8da3b5] hover:text-[#f0f4f8] hover:bg-white/5"
+                    : "text-[#8da3b5] md:hover:text-[#f0f4f8] md:hover:bg-white/5"
                 }`}
               >
                 {link.icon && (
@@ -125,7 +125,7 @@ const NavBar: FC<NavBarProps> = ({ savedCount = 1 }) => {
           {/* Guardados Pill */}
           <a
             href="#tracklist"
-            className="flex items-center gap-[7px] rounded-full px-[12px] py-[8px] text-[15px] font-medium text-[#8da3b5] no-underline transition-all duration-200 hover:text-[#f0f4f8] hover:bg-white/5"
+            className="flex items-center gap-[7px] rounded-full px-[12px] py-[8px] text-[15px] font-medium text-[#8da3b5] no-underline transition-all duration-200 md:hover:text-[#f0f4f8] md:hover:bg-white/5"
           >
             <div className="relative size-[16px] shrink-0 opacity-80">
               <Image
@@ -148,7 +148,7 @@ const NavBar: FC<NavBarProps> = ({ savedCount = 1 }) => {
               ref={accountButtonRef}
               type="button"
               onClick={() => setIsAccountMenuOpen((prev) => !prev)}
-              className="flex items-center justify-center rounded-full border border-[#8da3b5]/60 px-[14px] py-[8px] text-[15px] font-medium text-[#f0f4f8] transition-all duration-200 hover:border-white hover:bg-white/10 active:scale-95 cursor-pointer"
+              className="flex items-center justify-center rounded-full border border-[#8da3b5]/60 px-[14px] py-[8px] text-[15px] font-medium text-[#f0f4f8] transition-all duration-200 md:hover:border-white md:hover:bg-white/10 active:scale-95 cursor-pointer"
               aria-expanded={isAccountMenuOpen}
               aria-haspopup="true"
             >
@@ -164,16 +164,16 @@ const NavBar: FC<NavBarProps> = ({ savedCount = 1 }) => {
                 <Link
                   href="/login"
                   role="menuitem"
-                  className="group flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm font-medium text-[#f0f4f8] no-underline transition-all hover:bg-white/10"
+                  className="group flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm font-medium text-[#f0f4f8] no-underline transition-all md:hover:bg-white/10"
                   onClick={() => setIsAccountMenuOpen(false)}
                 >
-                  <LoginIcon className="h-4 w-4 text-[#8da3b5] group-hover:text-white" />
+                  <LoginIcon className="h-4 w-4 text-[#8da3b5] md:group-hover:text-white" />
                   <span>Iniciar sesión</span>
                 </Link>
                 <Link
                   href="/register"
                   role="menuitem"
-                  className="group flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm font-medium text-[#457490] no-underline transition-all hover:bg-[#457490]/15"
+                  className="group flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm font-medium text-[#457490] no-underline transition-all md:hover:bg-[#457490]/15"
                   onClick={() => setIsAccountMenuOpen(false)}
                 >
                   <RegisterIcon className="h-4 w-4 text-[#457490]" />
@@ -187,7 +187,7 @@ const NavBar: FC<NavBarProps> = ({ savedCount = 1 }) => {
         {/* Mobile Hamburger Button */}
         <button
           type="button"
-          className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-lg text-white transition-all hover:bg-white/10 active:scale-95 md:hidden cursor-pointer"
+          className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-lg text-white transition-all md:hover:bg-white/10 active:scale-95 md:hidden cursor-pointer"
           onClick={() => {
             setIsOpen((open) => !open);
             setIsAccountMenuOpen(false);
@@ -222,7 +222,7 @@ const NavBar: FC<NavBarProps> = ({ savedCount = 1 }) => {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 rounded-xl px-4 py-3 text-base font-medium text-[#f0f4f8] no-underline hover:bg-white/10"
+                className="flex items-center gap-3 rounded-xl px-4 py-3 text-base font-medium text-[#f0f4f8] no-underline md:hover:bg-white/10"
               >
                 {link.icon && (
                   <Image
@@ -239,7 +239,7 @@ const NavBar: FC<NavBarProps> = ({ savedCount = 1 }) => {
             <a
               href="#tracklist"
               onClick={() => setIsOpen(false)}
-              className="flex items-center justify-between rounded-xl px-4 py-3 text-base font-medium text-[#f0f4f8] no-underline hover:bg-white/10"
+              className="flex items-center justify-between rounded-xl px-4 py-3 text-base font-medium text-[#f0f4f8] no-underline md:hover:bg-white/10"
             >
               <div className="flex items-center gap-3">
                 <Image
@@ -259,7 +259,7 @@ const NavBar: FC<NavBarProps> = ({ savedCount = 1 }) => {
             <Link
               href="/login"
               onClick={() => setIsOpen(false)}
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-base font-medium text-[#f0f4f8] no-underline hover:bg-white/10"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-base font-medium text-[#f0f4f8] no-underline md:hover:bg-white/10"
             >
               <LoginIcon className="h-5 w-5 text-[#8da3b5]" />
               <span>Iniciar sesión</span>

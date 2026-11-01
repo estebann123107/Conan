@@ -95,7 +95,7 @@ export default function Reproductor({
             <button
               type="button"
               onClick={onPrev}
-              className="flex size-[36px] items-center justify-center rounded-full text-[#8da3b5] transition-all hover:bg-white/10 hover:text-white active:scale-95 cursor-pointer"
+              className="flex size-[36px] items-center justify-center rounded-full text-[#8da3b5] transition-all md:hover:bg-white/10 md:hover:text-white active:scale-95 cursor-pointer"
               aria-label="Pista anterior"
             >
               <div className="relative size-[18px] shrink-0">
@@ -112,7 +112,7 @@ export default function Reproductor({
             <button
               type="button"
               onClick={onTogglePlay}
-              className="flex size-[44px] items-center justify-center rounded-full bg-[#457490] text-[#09101a] shadow-[0px_0px_22px_0px_rgba(69,116,144,0.55)] transition-all hover:scale-105 active:scale-95 cursor-pointer"
+              className="flex size-[44px] items-center justify-center rounded-full bg-[#457490] text-[#09101a] shadow-[0px_0px_22px_0px_rgba(69,116,144,0.55)] transition-all md:hover:scale-105 active:scale-95 cursor-pointer"
               aria-label={isPlaying ? "Pausar" : "Reproducir"}
             >
               <div className="relative size-[18px] shrink-0">
@@ -133,7 +133,7 @@ export default function Reproductor({
             <button
               type="button"
               onClick={onNext}
-              className="flex size-[36px] items-center justify-center rounded-full text-[#8da3b5] transition-all hover:bg-white/10 hover:text-white active:scale-95 cursor-pointer"
+              className="flex size-[36px] items-center justify-center rounded-full text-[#8da3b5] transition-all md:hover:bg-white/10 md:hover:text-white active:scale-95 cursor-pointer"
               aria-label="Pista siguiente"
             >
               <div className="relative size-[18px] shrink-0">
@@ -170,12 +170,12 @@ export default function Reproductor({
                     key={idx}
                     onClick={() => handleSeek(idx)}
                     style={{ height: `${height}px` }}
-                    className={`flex-1 min-w-[2px] rounded-[2px] transition-all duration-150 hover:opacity-100 ${
+                    className={`flex-1 min-w-[2px] rounded-[2px] transition-all duration-150 md:hover:opacity-100 ${
                       isPlayed
                         ? isCurrent
                           ? "bg-[#457490] shadow-[0px_0px_10px_1px_#457490]"
                           : "bg-[#457490]"
-                        : "bg-[#8da3b5]/60 hover:bg-[#8da3b5]"
+                        : "bg-[#8da3b5]/60 md:hover:bg-[#8da3b5]"
                     }`}
                   />
                 );
@@ -191,7 +191,7 @@ export default function Reproductor({
         <button
           type="button"
           onClick={onToggleSave}
-          className="flex size-[36px] shrink-0 items-center justify-center rounded-full text-[#8da3b5] transition-all hover:bg-white/10 hover:scale-105 active:scale-95 cursor-pointer"
+          className="flex size-[36px] shrink-0 items-center justify-center rounded-full text-[#8da3b5] transition-all md:hover:bg-white/10 md:hover:scale-105 active:scale-95 cursor-pointer"
           aria-label={isSaved ? "Quitar de guardados" : "Guardar en favoritos"}
         >
           <div className="relative size-[20px] shrink-0">

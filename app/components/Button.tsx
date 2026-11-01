@@ -29,10 +29,10 @@ export default function ButtonLink({
     <button
       type="button"
       onClick={handleClick}
-      className={`group cursor-pointer rounded-full bg-[#457490] px-[26px] py-[14px] text-[15px] font-semibold text-[#09101a] transition-all duration-200 hover:brightness-110 active:scale-95 shadow-[0_4px_20px_rgba(69,116,144,0.35)] flex items-center justify-center gap-[10px] ${className}`}
+      className={`group cursor-pointer rounded-full bg-[#457490] px-[26px] py-[14px] text-[15px] font-semibold text-[#09101a] transition-all duration-200 md:hover:brightness-110 active:scale-95 shadow-[0_4px_20px_rgba(69,116,144,0.35)] flex items-center justify-center gap-[10px] ${className}`}
     >
       {icon && (
-        <div className="relative size-[16px] shrink-0 transition-transform duration-200 group-hover:scale-110">
+        <div className="relative size-[16px] shrink-0 transition-transform duration-200 md:group-hover:scale-110">
           <Image
             src={icon}
             alt=""
