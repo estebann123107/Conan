@@ -38,20 +38,14 @@ export default function AlbumsTarjeta({ album, isSelected, onSelect }: Props) {
       aria-label={`Seleccionar álbum ${album.nombre}`}
     >
       {/* Portada con imagen real del álbum y estilo Figma */}
-      <div
-        className={`relative size-[208px] shrink-0 overflow-hidden rounded-[6px] drop-shadow-[0px_14px_20px_rgba(0,0,0,0.55)] transition-all duration-300 ${
-          isSelected
-            ? "ring-2 ring-[#457490] shadow-[0_0_22px_rgba(69,116,144,0.45)]"
-            : "ring-1 ring-white/10 group-hover:ring-[#8da3b5]/60"
-        }`}
-      >
+      <div className="relative size-[208px] shrink-0 overflow-hidden rounded-[6px] drop-shadow-[0px_14px_20px_rgba(0,0,0,0.55)]">
         {/* Imagen real del álbum (de la rama main) */}
         <Image
           src={album.imagenReal}
           alt={album.nombre}
           fill
           sizes="208px"
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="scale-95 object-contain transition-transform duration-500 group-hover:scale-100"
         />
 
         {/* Degradado oscuro inferior estilo Figma para legibilidad */}

@@ -72,7 +72,7 @@ const NavBar: FC<NavBarProps> = ({ savedCount = 1 }) => {
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-[7px] bg-[#162032]/85 border-b border-[#8da3b5]/20 transition-all duration-300">
+    <header className="fixed top-0 z-40 w-full backdrop-blur-[7px] bg-[#162032]/85 transition-all duration-300">
       <div className="mx-auto flex h-[65px] max-w-[1440px] items-center justify-between px-6 sm:px-10 lg:px-[160px]">
         {/* Brand */}
         <Link
@@ -80,19 +80,16 @@ const NavBar: FC<NavBarProps> = ({ savedCount = 1 }) => {
           className="flex items-center gap-[10px] no-underline transition-opacity hover:opacity-90"
           aria-label="Conan Gray inicio"
         >
-          <div className="relative size-[22px] shrink-0">
+          <div className="relative size-[30px] shrink-0">
             <Image
               src="/Logo.png"
               alt="Logo"
-              width={22}
-              height={22}
+              width={30}
+              height={30}
               className="size-full object-contain"
               priority
             />
           </div>
-          <span className="font-serif text-[20px] font-bold text-[#f0f4f8] tracking-tight">
-            Conan Gray
-          </span>
         </Link>
 
         {/* Desktop Navigation Links */}

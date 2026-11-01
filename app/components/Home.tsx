@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import NavBar from "./NavBar";
 import ButtonLink from "./Button";
@@ -101,8 +101,34 @@ export default function Home() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [savedTrackIds, setSavedTrackIds] = useState<Set<number>>(new Set([2]));
   const [carouselIndex, setCarouselIndex] = useState(0);
+  const [showLeftFade, setShowLeftFade] = useState(false);
+  const [showRightFade, setShowRightFade] = useState(false);
 
   const carouselRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+
+    const updateFadeVisibility = () => {
+      const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+      setShowLeftFade(carousel.scrollLeft > 0);
+      setShowRightFade(carousel.scrollLeft < maxScrollLeft - 1);
+    };
+
+    updateFadeVisibility();
+    carousel.addEventListener("scroll", updateFadeVisibility, { passive: true });
+    window.addEventListener("resize", updateFadeVisibility);
+
+    const resizeObserver = new ResizeObserver(updateFadeVisibility);
+    resizeObserver.observe(carousel);
+
+    return () => {
+      carousel.removeEventListener("scroll", updateFadeVisibility);
+      window.removeEventListener("resize", updateFadeVisibility);
+      resizeObserver.disconnect();
+    };
+  }, []);
 
   const tracks = useMemo(() => {
     return (
@@ -267,21 +293,35 @@ export default function Home() {
           </div>
 
           {/* Carrusel de Álbumes */}
-          <div
-            ref={carouselRef}
-            className="flex items-start gap-[20px] overflow-x-auto scrollbar-hide pb-2"
-          >
-            {INITIAL_ALBUMS.map((album) => (
-              <AlbumsTarjeta
-                key={album.id}
-                album={album}
-                isSelected={selectedAlbum.id === album.id}
-                onSelect={(alb) => {
-                  setSelectedAlbum(alb);
-                  setCurrentTrackIndex(0);
-                }}
+          <div className="relative">
+            <div
+              ref={carouselRef}
+              className="flex items-start gap-[20px] overflow-x-auto scrollbar-hide pb-2"
+            >
+              {INITIAL_ALBUMS.map((album) => (
+                <AlbumsTarjeta
+                  key={album.id}
+                  album={album}
+                  isSelected={selectedAlbum.id === album.id}
+                  onSelect={(alb) => {
+                    setSelectedAlbum(alb);
+                    setCurrentTrackIndex(0);
+                  }}
+                />
+              ))}
+            </div>
+            {showLeftFade && (
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-[#09101a] to-transparent"
               />
-            ))}
+            )}
+            {showRightFade && (
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-[#09101a] to-transparent"
+              />
+            )}
           </div>
         </section>
 
