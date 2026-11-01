@@ -63,12 +63,11 @@ const NavBar: FC<NavBarProps> = ({ savedCount = 1 }) => {
   const navLinks = [
     { name: "Home", href: "/" },
     {
-      name: "Music",
-      href: "/music",
+      name: "Albums",
+      href: "/#albums",
       icon: "/figma-assets/nav-music.svg",
     },
-    { name: "Tour", href: "/tour" },
-    { name: "Merch", href: "/merch" },
+    { name: "Singles", href: "/#singles" },
   ];
 
   return (

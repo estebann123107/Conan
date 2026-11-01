@@ -235,7 +235,11 @@ export default function Home() {
       {/* Contenido Principal */}
       <main className="mx-auto flex max-w-[1440px] flex-col gap-[56px] px-6 sm:px-10 lg:px-[160px] pt-[56px] pb-[160px]">
         {/* Sección Albums */}
-        <section aria-labelledby="albums-heading" className="flex flex-col gap-[24px]">
+        <section
+          id="albums"
+          aria-labelledby="albums-heading"
+          className="flex scroll-mt-[85px] flex-col gap-[24px]"
+        >
           <div className="flex items-center justify-between">
             <h2
               id="albums-heading"
@@ -326,7 +330,11 @@ export default function Home() {
         </section>
 
         {/* Sección Singles */}
-        <section aria-labelledby="singles-heading" className="flex flex-col gap-[24px]">
+        <section
+          id="singles"
+          aria-labelledby="singles-heading"
+          className="flex scroll-mt-[85px] flex-col gap-[24px]"
+        >
           <div className="flex items-center justify-between">
             <h2
               id="singles-heading"

@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Conan Gray – Wishbone Deluxe",
   description: "Conan Gray Official Website - Wishbone Deluxe out now",
   icons: {
-    icon: "/figma-assets/brand-icon.svg",
+    icon: "/Miniatura.png",
   },
 };
 
