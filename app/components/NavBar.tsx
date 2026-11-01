@@ -82,7 +82,7 @@ const NavBar: FC<NavBarProps> = ({ savedCount = 1 }) => {
         >
           <div className="relative size-[22px] shrink-0">
             <Image
-              src="/figma-assets/brand-icon.svg"
+              src="/Logo.png"
               alt="Logo"
               width={22}
               height={22}
