@@ -48,7 +48,7 @@ export default function TrackRow({
       {/* Columna número / Play */}
       <div className="flex h-[32px] w-[44px] shrink-0 items-center justify-center">
         {isActive || isHovered ? (
-          <div className="relative size-[14px] shrink-0 text-[#d4af37]">
+          <div className="relative size-[14px] shrink-0 text-[#457490]">
             <Image
               src="/figma-assets/track-play.svg"
               alt="Play"

@@ -167,7 +167,7 @@ export default function Home() {
   };
 
   return (
-    <div className="relative min-h-screen w-full bg-[#09101a] text-[#f0f4f8] overflow-x-hidden selection:bg-[#d4af37]/30 selection:text-white">
+    <div className="relative min-h-screen w-full bg-[#09101a] text-[#f0f4f8] overflow-x-hidden selection:bg-[#457490]/30 selection:text-white">
       {/* Navbar con contador interactivo de Guardados */}
       <NavBar savedCount={savedTrackIds.size} />
 
@@ -183,7 +183,7 @@ export default function Home() {
         {/* Texto del Hero */}
         <div className="relative z-10 mx-auto flex h-full max-w-[1440px] flex-col justify-center px-6 sm:px-10 lg:px-[160px]">
           <div className="flex max-w-[760px] flex-col items-start gap-[14px]">
-            <p className="text-[12px] font-semibold tracking-[2.64px] uppercase text-[#d4af37]">
+            <p className="text-[12px] font-semibold tracking-[2.64px] uppercase text-[#457490]">
               NUEVO LANZAMIENTO
             </p>
             <h1 className="font-serif text-5xl sm:text-7xl lg:text-[104px] font-bold leading-[0.95] text-[#f0f4f8] tracking-tight drop-shadow-md">

@@ -106,7 +106,7 @@ const NavBar: FC<NavBarProps> = ({ savedCount = 1 }) => {
                 href={link.href}
                 className={`flex items-center gap-[7px] rounded-full px-[12px] py-[8px] text-[15px] font-medium no-underline transition-all duration-200 ${
                   isActive
-                    ? "bg-[#d4af37]/15 text-[#d4af37] border border-[#d4af37]/35 shadow-xs"
+                    ? "bg-[#457490]/15 text-[#457490] border border-[#457490]/35 shadow-xs"
                     : "text-[#8da3b5] hover:text-[#f0f4f8] hover:bg-white/5"
                 }`}
               >
@@ -177,10 +177,10 @@ const NavBar: FC<NavBarProps> = ({ savedCount = 1 }) => {
                 <Link
                   href="/register"
                   role="menuitem"
-                  className="group flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm font-medium text-[#d4af37] no-underline transition-all hover:bg-[#d4af37]/15"
+                  className="group flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm font-medium text-[#457490] no-underline transition-all hover:bg-[#457490]/15"
                   onClick={() => setIsAccountMenuOpen(false)}
                 >
-                  <RegisterIcon className="h-4 w-4 text-[#d4af37]" />
+                  <RegisterIcon className="h-4 w-4 text-[#457490]" />
                   <span>Registrarse</span>
                 </Link>
               </div>
@@ -255,7 +255,7 @@ const NavBar: FC<NavBarProps> = ({ savedCount = 1 }) => {
                 />
                 <span>Guardados</span>
               </div>
-              <span className="rounded-full bg-[#09101a] px-2.5 py-0.5 text-xs font-semibold text-[#d4af37]">
+              <span className="rounded-full bg-[#09101a] px-2.5 py-0.5 text-xs font-semibold text-[#457490]">
                 {savedCount}
               </span>
             </a>
@@ -271,7 +271,7 @@ const NavBar: FC<NavBarProps> = ({ savedCount = 1 }) => {
             <Link
               href="/register"
               onClick={() => setIsOpen(false)}
-              className="flex items-center gap-3 rounded-xl bg-[#d4af37] px-4 py-3 text-base font-semibold text-[#09101a] no-underline"
+              className="flex items-center gap-3 rounded-xl bg-[#457490] px-4 py-3 text-base font-semibold text-[#09101a] no-underline"
             >
               <RegisterIcon className="h-5 w-5 text-[#09101a]" />
               <span>Registrarse</span>

@@ -41,7 +41,7 @@ export default function AlbumsTarjeta({ album, isSelected, onSelect }: Props) {
       <div
         className={`relative size-[208px] shrink-0 overflow-hidden rounded-[6px] drop-shadow-[0px_14px_20px_rgba(0,0,0,0.55)] transition-all duration-300 ${
           isSelected
-            ? "ring-2 ring-[#d4af37] shadow-[0_0_22px_rgba(212,175,55,0.45)]"
+            ? "ring-2 ring-[#457490] shadow-[0_0_22px_rgba(69,116,144,0.45)]"
             : "ring-1 ring-white/10 group-hover:ring-[#8da3b5]/60"
         }`}
       >
@@ -78,7 +78,7 @@ export default function AlbumsTarjeta({ album, isSelected, onSelect }: Props) {
 
       {/* Textos bajo la portada (estilo Figma) */}
       <div className="flex flex-col gap-0.5">
-        <p className="font-serif text-[18px] font-medium leading-normal text-[#f0f4f8] transition-colors group-hover:text-[#d4af37] truncate">
+        <p className="font-serif text-[18px] font-medium leading-normal text-[#f0f4f8] transition-colors group-hover:text-[#457490] truncate">
           {album.nombre}
         </p>
         <p className="text-[14px] font-normal text-[#8da3b5] leading-normal">

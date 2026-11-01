@@ -112,7 +112,7 @@ export default function Reproductor({
             <button
               type="button"
               onClick={onTogglePlay}
-              className="flex size-[44px] items-center justify-center rounded-full bg-[#d4af37] text-[#09101a] shadow-[0px_0px_22px_0px_rgba(212,175,55,0.55)] transition-all hover:scale-105 active:scale-95 cursor-pointer"
+              className="flex size-[44px] items-center justify-center rounded-full bg-[#457490] text-[#09101a] shadow-[0px_0px_22px_0px_rgba(212,175,55,0.55)] transition-all hover:scale-105 active:scale-95 cursor-pointer"
               aria-label={isPlaying ? "Pausar" : "Reproducir"}
             >
               <div className="relative size-[18px] shrink-0">
@@ -173,8 +173,8 @@ export default function Reproductor({
                     className={`flex-1 min-w-[2px] rounded-[2px] transition-all duration-150 hover:opacity-100 ${
                       isPlayed
                         ? isCurrent
-                          ? "bg-[#d4af37] shadow-[0px_0px_10px_1px_#d4af37]"
-                          : "bg-[#d4af37]"
+                          ? "bg-[#457490] shadow-[0px_0px_10px_1px_#457490]"
+                          : "bg-[#457490]"
                         : "bg-[#8da3b5]/60 hover:bg-[#8da3b5]"
                     }`}
                   />
