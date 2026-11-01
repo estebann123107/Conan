@@ -9,7 +9,7 @@ export type AlbumData = {
   yearMeta: string;
   gradient: string;
   shineAsset: string;
-  imagenReal?: string;
+  imagenReal: string;
   tracks?: {
     id: number;
     title: string;
@@ -27,7 +27,7 @@ export default function AlbumsTarjeta({ album, isSelected, onSelect }: Props) {
   return (
     <div
       onClick={() => onSelect?.(album)}
-      className="group flex w-[208px] shrink-0 cursor-pointer flex-col gap-[12px] text-left transition-transform duration-200 hover:-translate-y-1"
+      className="group flex w-[208px] shrink-0 cursor-pointer flex-col gap-[12px] text-left transition-transform duration-200 hover:-translate-y-1.5"
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
@@ -37,42 +37,48 @@ export default function AlbumsTarjeta({ album, isSelected, onSelect }: Props) {
       }}
       aria-label={`Seleccionar álbum ${album.nombre}`}
     >
-      {/* Portada */}
+      {/* Portada con imagen real del álbum y estilo Figma */}
       <div
-        className={`relative size-[208px] shrink-0 overflow-hidden rounded-[6px] p-[14px] drop-shadow-[0px_14px_20px_rgba(0,0,0,0.5)] transition-all duration-300 ${
+        className={`relative size-[208px] shrink-0 overflow-hidden rounded-[6px] drop-shadow-[0px_14px_20px_rgba(0,0,0,0.55)] transition-all duration-300 ${
           isSelected
-            ? "ring-2 ring-[#d4af37] shadow-[0_0_20px_rgba(212,175,55,0.4)]"
-            : "group-hover:ring-1 group-hover:ring-[#8da3b5]/50"
+            ? "ring-2 ring-[#d4af37] shadow-[0_0_22px_rgba(212,175,55,0.45)]"
+            : "ring-1 ring-white/10 group-hover:ring-[#8da3b5]/60"
         }`}
       >
-        {/* Fondo degradado */}
-        <div className={`absolute inset-0 bg-gradient-to-b ${album.gradient}`} />
+        {/* Imagen real del álbum (de la rama main) */}
+        <Image
+          src={album.imagenReal}
+          alt={album.nombre}
+          fill
+          sizes="208px"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+        />
 
-        {/* Brillo decorativo Figma */}
-        <div className="absolute -top-[8.44px] left-[53.96px] size-[150px] pointer-events-none opacity-90 transition-transform duration-500 group-hover:scale-110">
+        {/* Degradado oscuro inferior estilo Figma para legibilidad */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#09101a]/85 via-[#09101a]/25 via-40% to-transparent pointer-events-none" />
+
+        {/* Brillo decorativo sutil de Figma */}
+        <div className="absolute -top-[10px] -right-[10px] size-[120px] pointer-events-none opacity-40 mix-blend-screen transition-opacity duration-300 group-hover:opacity-70">
           <Image
             src={album.shineAsset}
             alt=""
-            width={150}
-            height={150}
+            width={120}
+            height={120}
             className="size-full object-contain"
           />
         </div>
 
-        {/* Degradado de sombra inferior */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent via-[45%] to-[#09101a]/70 pointer-events-none" />
-
-        {/* Título en la portada */}
-        <div className="relative z-10 mt-auto">
-          <p className="font-serif text-[20px] font-bold leading-[21px] text-[#f0f4f8] drop-shadow-md">
+        {/* Título en la portada (estilo Figma) */}
+        <div className="absolute inset-x-0 bottom-0 z-10 p-[14px]">
+          <p className="font-serif text-[19px] font-bold leading-[21px] text-[#f0f4f8] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] truncate">
             {album.nombre}
           </p>
         </div>
       </div>
 
-      {/* Textos bajo la portada */}
-      <div className="flex flex-col gap-1">
-        <p className="font-serif text-[18px] font-medium leading-normal text-[#f0f4f8] truncate">
+      {/* Textos bajo la portada (estilo Figma) */}
+      <div className="flex flex-col gap-0.5">
+        <p className="font-serif text-[18px] font-medium leading-normal text-[#f0f4f8] transition-colors group-hover:text-[#d4af37] truncate">
           {album.nombre}
         </p>
         <p className="text-[14px] font-normal text-[#8da3b5] leading-normal">

@@ -14,6 +14,7 @@ const WAVEFORM_HEIGHTS = [
 type Props = {
   currentTrack: Track;
   albumName?: string;
+  albumCover?: string;
   isPlaying: boolean;
   isSaved: boolean;
   onTogglePlay: () => void;
@@ -25,6 +26,7 @@ type Props = {
 export default function Reproductor({
   currentTrack,
   albumName = "Wishbone Deluxe",
+  albumCover = "/Wishbone.png",
   isPlaying,
   isSaved,
   onTogglePlay,
@@ -32,7 +34,6 @@ export default function Reproductor({
   onNext,
   onToggleSave,
 }: Props) {
-  // Simular posición en la onda (de 0 a 71, Figma muestra en la barra 25 ~ 35%)
   const [activeBarIndex, setActiveBarIndex] = useState(25);
   const [currentTimeSec, setCurrentTimeSec] = useState(68); // 1:08
 
@@ -54,7 +55,6 @@ export default function Reproductor({
   const handleSeek = (index: number) => {
     setActiveBarIndex(index);
     const ratio = index / (WAVEFORM_HEIGHTS.length - 1);
-    // Parse track duration "3:15" -> 195s
     const parts = currentTrack.duration.split(":");
     const totalSecs =
       parts.length === 2 ? parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10) : 195;
@@ -67,12 +67,16 @@ export default function Reproductor({
       className="fixed bottom-4 left-0 right-0 z-40 flex justify-center px-4 pointer-events-none"
     >
       <div className="pointer-events-auto flex w-full max-w-[960px] items-center justify-between gap-3 sm:gap-4 md:gap-[18px] rounded-[20px] border border-[#8da3b5]/30 bg-[#162032]/95 px-3 sm:px-4 md:px-[18px] py-[12px] shadow-[0px_20px_50px_-12px_rgba(0,0,0,0.7)] backdrop-blur-[9px]">
-        {/* Ahora suena */}
+        {/* Ahora suena con imagen real */}
         <div className="flex h-[46px] w-[180px] sm:w-[220px] md:w-[250px] shrink-0 items-center gap-[12px]">
-          <div className="relative size-[46px] shrink-0 overflow-hidden rounded-[6px] bg-gradient-to-b from-[#1a3a52] to-[#09101a] flex items-center justify-center border border-white/5">
-            <span className="font-serif text-[11px] font-bold text-[#d4af37]/80">
-              CG
-            </span>
+          <div className="relative size-[46px] shrink-0 overflow-hidden rounded-[6px] border border-white/10 shadow-md">
+            <Image
+              src={albumCover}
+              alt={albumName}
+              fill
+              sizes="46px"
+              className="object-cover"
+            />
           </div>
           <div className="min-w-0 flex-1 leading-normal">
             <p className="truncate font-serif text-[14px] sm:text-[16px] font-medium text-[#f0f4f8]">

@@ -98,8 +98,7 @@ const INITIAL_ALBUMS: AlbumData[] = [
 export default function Home() {
   const [selectedAlbum, setSelectedAlbum] = useState<AlbumData>(INITIAL_ALBUMS[4]); // Wishbone selected by default as in Figma
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true); // Playing by default as shown in Figma mockup
-  // Figma mockup has Track 2 favorited by default (heart-filled.svg)
+  const [isPlaying, setIsPlaying] = useState(true);
   const [savedTrackIds, setSavedTrackIds] = useState<Set<number>>(new Set([2]));
   const [carouselIndex, setCarouselIndex] = useState(0);
 
@@ -154,7 +153,7 @@ export default function Home() {
 
   const scrollCarousel = (direction: "left" | "right") => {
     if (!carouselRef.current) return;
-    const cardWidth = 228; // 208px + 20px gap
+    const cardWidth = 228;
     const newIndex =
       direction === "left"
         ? Math.max(0, carouselIndex - 1)
@@ -176,6 +175,9 @@ export default function Home() {
       <section className="relative h-[560px] w-full overflow-hidden">
         {/* Cielo Degradado */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0c1a2e] via-[#17304a] via-[48%] to-[#22405a]" />
+
+        {/* Textura sutil con la imagen wishbonedelux.jpg de main */}
+        <div className="absolute inset-0 bg-[url('/wishbonedelux.jpg')] bg-cover bg-center opacity-15 mix-blend-overlay pointer-events-none" />
 
         {/* Resplandor decorativo de la luna */}
         <div className="absolute -top-[130px] right-[50px] md:right-[160px] lg:left-[770px] size-[620px] pointer-events-none opacity-90">
@@ -220,10 +222,10 @@ export default function Home() {
             <p className="text-[12px] font-semibold tracking-[2.64px] uppercase text-[#d4af37]">
               NUEVO LANZAMIENTO
             </p>
-            <h1 className="font-serif text-5xl sm:text-7xl lg:text-[104px] font-bold leading-[0.95] text-[#f0f4f8] tracking-tight">
+            <h1 className="font-serif text-5xl sm:text-7xl lg:text-[104px] font-bold leading-[0.95] text-[#f0f4f8] tracking-tight drop-shadow-md">
               Wishbone Deluxe
             </h1>
-            <p className="font-serif text-2xl sm:text-[28px] italic font-normal text-[#f0f4f8] opacity-90">
+            <p className="font-serif text-2xl sm:text-[28px] italic font-normal text-[#f0f4f8] opacity-90 drop-shadow-sm">
               out now!!
             </p>
             <div className="pt-2">
@@ -334,9 +336,9 @@ export default function Home() {
               title="Wishbone"
               type="Single"
               coverTitle="Wishbone"
+              imageSrc="/Wishbone.png"
               shineAsset="/figma-assets/shine-single.svg"
               onClick={() => {
-                // Seleccionar Wishbone y reproducir primera pista
                 setSelectedAlbum(INITIAL_ALBUMS[4]);
                 handlePlayTrack(INITIAL_ALBUMS[4].tracks![0]);
               }}
@@ -402,7 +404,16 @@ export default function Home() {
 
         {/* Footer */}
         <footer className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-[#8da3b5]/20 pt-[24px] text-[13px] font-normal text-[#8da3b5]">
-          <p>Conan Gray</p>
+          <div className="flex items-center gap-3">
+            <Image
+              src="/Logo.png"
+              alt="Conan Gray"
+              width={28}
+              height={28}
+              className="object-contain opacity-75"
+            />
+            <p>Conan Gray</p>
+          </div>
           <p className="flex gap-2">
             <span>Home</span>
             <span>·</span>
@@ -423,6 +434,7 @@ export default function Home() {
             ? "Wishbone Deluxe"
             : selectedAlbum.nombre
         }
+        albumCover={selectedAlbum.imagenReal}
         isPlaying={isPlaying}
         isSaved={savedTrackIds.has(currentTrack.id)}
         onTogglePlay={() => setIsPlaying((p) => !p)}
