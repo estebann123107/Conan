@@ -112,7 +112,7 @@ export default function Reproductor({
             <button
               type="button"
               onClick={onTogglePlay}
-              className="flex size-[44px] items-center justify-center rounded-full bg-[#457490] text-[#09101a] shadow-[0px_0px_22px_0px_rgba(212,175,55,0.55)] transition-all hover:scale-105 active:scale-95 cursor-pointer"
+              className="flex size-[44px] items-center justify-center rounded-full bg-[#457490] text-[#09101a] shadow-[0px_0px_22px_0px_rgba(69,116,144,0.55)] transition-all hover:scale-105 active:scale-95 cursor-pointer"
               aria-label={isPlaying ? "Pausar" : "Reproducir"}
             >
               <div className="relative size-[18px] shrink-0">

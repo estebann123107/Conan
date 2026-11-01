@@ -2,8 +2,8 @@
 <circle id="Resplandor" cx="310" cy="310" r="310" fill="url(#paint0_radial_0_121)"/>
 <defs>
 <radialGradient id="paint0_radial_0_121" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(310 310) scale(310)">
-<stop stop-color="#D4AF37" stop-opacity="0.32"/>
-<stop offset="1" stop-color="#D4AF37" stop-opacity="0"/>
+<stop stop-color="#457490" stop-opacity="0.32"/>
+<stop offset="1" stop-color="#457490" stop-opacity="0"/>
 </radialGradient>
 </defs>
 </svg>

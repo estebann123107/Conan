@@ -63,7 +63,7 @@ export default function SingleCard({
 
       {/* Info */}
       <div className="flex flex-col gap-[2px]">
-        <p className="font-serif text-[24px] font-medium text-[#f0f4f8] transition-colors group-hover:text-[#d4af37]">
+        <p className="font-serif text-[24px] font-medium text-[#f0f4f8] transition-colors group-hover:text-[#457490]">
           {title}
         </p>
         <p className="text-[15px] font-normal text-[#8da3b5]">{type}</p>

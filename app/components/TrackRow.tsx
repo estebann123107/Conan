@@ -68,7 +68,7 @@ export default function TrackRow({
       <div className="min-w-0 flex-1">
         <p
           className={`truncate text-[15px] font-medium leading-normal transition-colors ${
-            isActive ? "text-[#d4af37]" : "text-[#f0f4f8]"
+            isActive ? "text-[#457490]" : "text-[#f0f4f8]"
           }`}
         >
           {track.title}

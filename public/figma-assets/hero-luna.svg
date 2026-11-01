@@ -15,7 +15,7 @@
 </filter>
 <radialGradient id="paint0_radial_0_127" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(160 160) scale(60)">
 <stop stop-color="#F6E7AE"/>
-<stop offset="1" stop-color="#D4AF37"/>
+<stop offset="1" stop-color="#457490"/>
 </radialGradient>
 </defs>
 </svg>

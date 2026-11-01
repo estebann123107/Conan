@@ -2,8 +2,8 @@
 <circle id="Brillo" cx="75" cy="75" r="75" fill="url(#paint0_radial_0_118)"/>
 <defs>
 <radialGradient id="paint0_radial_0_118" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(75 75) scale(75)">
-<stop stop-color="#D4AF37" stop-opacity="0.9"/>
-<stop offset="1" stop-color="#D4AF37" stop-opacity="0"/>
+<stop stop-color="#457490" stop-opacity="0.9"/>
+<stop offset="1" stop-color="#457490" stop-opacity="0"/>
 </radialGradient>
 </defs>
 </svg>
