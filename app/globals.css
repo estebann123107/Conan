@@ -1,10 +1,29 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 @theme {
+  --color-abyss: #09101a;
+  --color-navy: #162032;
+  --color-fog: #8da3b5;
+  --color-brass: #457490; /* replaced yellow with main brand */
+  --color-canvas: #f0f4f8;
+
   --color-brand-dark: #012c42;
-  --color-brand: #457490;
+  --color-brand: #457490; /* replaced yellow */
   --color-brand-light: #6ba3c4;
   --color-site-bg: #1c262f;
+
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
 }
 
 .scrollbar-hide {

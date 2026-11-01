@@ -3,27 +3,15 @@
 import { type FC, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { DesktopNavLinks, MobileNavMenu, LoginIcon, RegisterIcon } from "./ListNav";
+import { usePathname } from "next/navigation";
+import { LoginIcon, RegisterIcon } from "./ListNav";
 
-const UserIcon: FC = () => (
-  <svg
-    aria-hidden="true"
-    viewBox="0 0 24 24"
-    fill="none"
-    className="h-6 w-6"
-  >
-    <circle cx="12" cy="8" r="3.5" stroke="currentColor" strokeWidth="1.8" />
-    <path
-      d="M5.5 20a6.5 6.5 0 0 1 13 0"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-    />
-  </svg>
-);
+type NavBarProps = {
+  savedCount?: number;
+};
 
-const NavBar: FC = () => {
-  const listNav = ["Home", "Music", "Tour", "Merch"];
+const NavBar: FC<NavBarProps> = ({ savedCount = 1 }) => {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const accountMenuRef = useRef<HTMLDivElement>(null);
@@ -72,122 +60,222 @@ const NavBar: FC = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [isOpen]);
 
+  const navLinks = [
+    { name: "Home", href: "/" },
+    {
+      name: "Albums",
+      href: "/#albums",
+      icon: "/figma-assets/nav-music.svg",
+    },
+    { name: "Singles", href: "/#singles" },
+  ];
+
   return (
-    <>
-      <nav className="fixed top-0 left-0 z-20 flex w-full items-center justify-between bg-[rgba(83,130,172,0.171)] p-2.5 backdrop-blur-[10px]">
+    <header className="fixed top-0 z-40 w-full backdrop-blur-[7px] bg-[#162032]/85 transition-all duration-300">
+      <div className="mx-auto flex h-[65px] max-w-[1440px] items-center justify-between px-6 sm:px-10 lg:px-[160px]">
+        {/* Brand */}
         <Link
           href="/"
-          aria-label="Conan Gray, inicio"
-          className="transition-transform duration-200 hover:scale-105 active:scale-95"
+          className="flex items-center gap-[10px] no-underline transition-opacity md:hover:opacity-90"
+          aria-label="Conan Gray inicio"
         >
-          <Image
-            src="/Logo.png"
-            alt="Conan Gray Signature"
-            width={50}
-            height={50}
-            className="ml-4 h-[50px] w-[50px] md:ml-[50px]"
-            priority
-          />
+          <div className="relative size-[30px] shrink-0">
+            <Image
+              src="/Logo.png"
+              alt="Logo"
+              width={30}
+              height={30}
+              className="size-full object-contain"
+              priority
+            />
+          </div>
         </Link>
-        <div className="flex items-center gap-2 md:gap-4">
-          <DesktopNavLinks data={listNav} />
 
-          {/* Menú de cuenta desktop con dropdown animado */}
-          <div
-            className="relative z-50 mr-3 hidden md:block md:mr-[10px]"
-            ref={accountMenuRef}
+        {/* Desktop Navigation Links */}
+        <nav className="hidden items-center gap-[12px] md:flex" aria-label="Navegación principal">
+          {navLinks.map((link) => {
+            const isActive =
+              link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`flex items-center gap-[7px] rounded-full px-[12px] py-[8px] text-[15px] font-medium no-underline transition-all duration-200 ${
+                  isActive
+                    ? "bg-[#457490]/15 text-[#457490] border border-[#457490]/35 shadow-xs"
+                    : "text-[#8da3b5] md:hover:text-[#f0f4f8] md:hover:bg-white/5"
+                }`}
+              >
+                {link.icon && (
+                  <div className="relative size-[16px] shrink-0 opacity-80">
+                    <Image
+                      src={link.icon}
+                      alt=""
+                      width={16}
+                      height={16}
+                      className="size-full object-contain"
+                    />
+                  </div>
+                )}
+                <span>{link.name}</span>
+              </Link>
+            );
+          })}
+
+          {/* Guardados Pill */}
+          <a
+            href="#tracklist"
+            className="flex items-center gap-[7px] rounded-full px-[12px] py-[8px] text-[15px] font-medium text-[#8da3b5] no-underline transition-all duration-200 md:hover:text-[#f0f4f8] md:hover:bg-white/5"
           >
+            <div className="relative size-[16px] shrink-0 opacity-80">
+              <Image
+                src="/figma-assets/nav-saved.svg"
+                alt=""
+                width={16}
+                height={16}
+                className="size-full object-contain"
+              />
+            </div>
+            <span>Guardados</span>
+            <span className="rounded-full bg-[#162032] border border-[#8da3b5]/30 px-1.5 py-0.2 text-[13px] font-semibold text-[#f0f4f8]">
+              {savedCount}
+            </span>
+          </a>
+
+          {/* Iniciar sesión / Menú de cuenta */}
+          <div className="relative" ref={accountMenuRef}>
             <button
               ref={accountButtonRef}
               type="button"
-              className={`flex h-10 w-10 items-center justify-center rounded-full text-white transition-all duration-300 hover:bg-white/10 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
-                isAccountMenuOpen ? "bg-white/20 shadow-md ring-2 ring-white/30 scale-105" : ""
-              }`}
-              onClick={() => {
-                setIsAccountMenuOpen((open) => !open);
-                setIsOpen(false);
-              }}
-              aria-label="Abrir opciones de cuenta"
+              onClick={() => setIsAccountMenuOpen((prev) => !prev)}
+              className="flex items-center justify-center rounded-full border border-[#8da3b5]/60 px-[14px] py-[8px] text-[15px] font-medium text-[#f0f4f8] transition-all duration-200 md:hover:border-white md:hover:bg-white/10 active:scale-95 cursor-pointer"
               aria-expanded={isAccountMenuOpen}
-              aria-controls="account-menu"
+              aria-haspopup="true"
             >
-              <UserIcon />
+              Iniciar sesión
             </button>
 
-            {/* Menú desplegable con transiciones de entrada y salida */}
-            <div
-              id="account-menu"
-              role="menu"
-              aria-label="Opciones de cuenta"
-              aria-hidden={!isAccountMenuOpen}
-              className={`absolute right-0 top-full mt-4 w-48 origin-top-right overflow-hidden rounded-2xl border border-white/15 bg-[#1c262f]/95 p-1.5 shadow-2xl backdrop-blur-xl transition-all duration-200 ease-out ${
-                isAccountMenuOpen
-                  ? "pointer-events-auto visible scale-100 opacity-100 translate-y-0"
-                  : "pointer-events-none invisible scale-95 opacity-0 -translate-y-2"
-              }`}
-            >
-              <div className="flex flex-col gap-1">
+            {/* Dropdown Menu */}
+            {isAccountMenuOpen && (
+              <div
+                className="absolute right-0 top-full mt-2 w-48 origin-top-right overflow-hidden rounded-2xl border border-white/15 bg-[#162032]/95 p-1.5 shadow-2xl backdrop-blur-xl animate-menu-item"
+                role="menu"
+              >
                 <Link
                   href="/login"
                   role="menuitem"
-                  className="group flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm font-medium text-white/90 no-underline transition-all duration-200 hover:bg-white/10 hover:text-white hover:translate-x-1 active:scale-[0.98] focus-visible:bg-white/10 focus-visible:outline-none"
+                  className="group flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm font-medium text-[#f0f4f8] no-underline transition-all md:hover:bg-white/10"
                   onClick={() => setIsAccountMenuOpen(false)}
                 >
-                  <LoginIcon className="h-4 w-4 text-white/70 transition-colors group-hover:text-white" />
+                  <LoginIcon className="h-4 w-4 text-[#8da3b5] md:group-hover:text-white" />
                   <span>Iniciar sesión</span>
                 </Link>
                 <Link
                   href="/register"
                   role="menuitem"
-                  className="group flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm font-medium text-white/90 no-underline transition-all duration-200 hover:bg-white/10 hover:text-white hover:translate-x-1 active:scale-[0.98] focus-visible:bg-white/10 focus-visible:outline-none"
+                  className="group flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm font-medium text-[#457490] no-underline transition-all md:hover:bg-[#457490]/15"
                   onClick={() => setIsAccountMenuOpen(false)}
                 >
-                  <RegisterIcon className="h-4 w-4 text-brand-light transition-colors group-hover:text-white" />
+                  <RegisterIcon className="h-4 w-4 text-[#457490]" />
                   <span>Registrarse</span>
                 </Link>
               </div>
-            </div>
+            )}
           </div>
+        </nav>
 
-          {/* Botón hamburguesa móvil con animación suave */}
-          <button
-            type="button"
-            className="relative z-40 mr-4 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-lg text-white transition-all duration-200 hover:bg-white/10 active:scale-95 focus-visible:outline-2 focus-visible:outline-white md:hidden"
-            onClick={() => {
-              setIsOpen((open) => !open);
-              setIsAccountMenuOpen(false);
-            }}
-            aria-label={
-              isOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"
-            }
-            aria-expanded={isOpen}
-          >
-            <span
-              className={`block h-[2.5px] w-[22px] rounded-full bg-white transition-all duration-300 ease-in-out ${
-                isOpen ? "translate-y-[8.5px] rotate-45" : ""
-              }`}
-            />
-            <span
-              className={`block h-[2.5px] w-[22px] rounded-full bg-white transition-all duration-300 ease-in-out ${
-                isOpen ? "scale-x-0 opacity-0" : "scale-x-100 opacity-100"
-              }`}
-            />
-            <span
-              className={`block h-[2.5px] w-[22px] rounded-full bg-white transition-all duration-300 ease-in-out ${
-                isOpen ? "-translate-y-[8.5px] -rotate-45" : ""
-              }`}
-            />
-          </button>
+        {/* Mobile Hamburger Button */}
+        <button
+          type="button"
+          className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-lg text-white transition-all md:hover:bg-white/10 active:scale-95 md:hidden cursor-pointer"
+          onClick={() => {
+            setIsOpen((open) => !open);
+            setIsAccountMenuOpen(false);
+          }}
+          aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={isOpen}
+        >
+          <span
+            className={`block h-[2px] w-[20px] rounded-full bg-white transition-all duration-300 ${
+              isOpen ? "translate-y-[8px] rotate-45" : ""
+            }`}
+          />
+          <span
+            className={`block h-[2px] w-[20px] rounded-full bg-white transition-all duration-300 ${
+              isOpen ? "scale-x-0 opacity-0" : "scale-x-100 opacity-100"
+            }`}
+          />
+          <span
+            className={`block h-[2px] w-[20px] rounded-full bg-white transition-all duration-300 ${
+              isOpen ? "-translate-y-[8px] -rotate-45" : ""
+            }`}
+          />
+        </button>
+      </div>
+
+      {/* Mobile Drawer Menu */}
+      {isOpen && (
+        <div className="fixed inset-x-0 top-[65px] z-40 bg-[#162032]/98 border-b border-[#8da3b5]/20 p-6 backdrop-blur-xl md:hidden animate-menu-item">
+          <div className="flex flex-col gap-3">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="flex items-center gap-3 rounded-xl px-4 py-3 text-base font-medium text-[#f0f4f8] no-underline md:hover:bg-white/10"
+              >
+                {link.icon && (
+                  <Image
+                    src={link.icon}
+                    alt=""
+                    width={18}
+                    height={18}
+                    className="opacity-80"
+                  />
+                )}
+                <span>{link.name}</span>
+              </Link>
+            ))}
+            <a
+              href="#tracklist"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center justify-between rounded-xl px-4 py-3 text-base font-medium text-[#f0f4f8] no-underline md:hover:bg-white/10"
+            >
+              <div className="flex items-center gap-3">
+                <Image
+                  src="/figma-assets/nav-saved.svg"
+                  alt=""
+                  width={18}
+                  height={18}
+                  className="opacity-80"
+                />
+                <span>Guardados</span>
+              </div>
+              <span className="rounded-full bg-[#09101a] px-2.5 py-0.5 text-xs font-semibold text-[#457490]">
+                {savedCount}
+              </span>
+            </a>
+            <div className="my-2 border-t border-[#8da3b5]/20" />
+            <Link
+              href="/login"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-base font-medium text-[#f0f4f8] no-underline md:hover:bg-white/10"
+            >
+              <LoginIcon className="h-5 w-5 text-[#8da3b5]" />
+              <span>Iniciar sesión</span>
+            </Link>
+            <Link
+              href="/register"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center gap-3 rounded-xl bg-[#457490] px-4 py-3 text-base font-semibold text-[#09101a] no-underline"
+            >
+              <RegisterIcon className="h-5 w-5 text-[#09101a]" />
+              <span>Registrarse</span>
+            </Link>
+          </div>
         </div>
-      </nav>
-
-      {/* Menú de navegación móvil */}
-      <MobileNavMenu
-        data={listNav}
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-      />
-    </>
+      )}
+    </header>
   );
 };
 

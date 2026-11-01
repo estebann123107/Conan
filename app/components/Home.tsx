@@ -1,80 +1,460 @@
-import AlbumsTarjeta from "./AlbumsTarjeta";
-import ButtonLink from "./Button";
+"use client";
+
+import { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import NavBar from "./NavBar";
+import ButtonLink from "./Button";
+import AlbumsTarjeta, { AlbumData } from "./AlbumsTarjeta";
+import SingleCard from "./SingleCard";
+import TrackRow, { Track } from "./TrackRow";
+import Reproductor from "./Reproductor";
+
+const INITIAL_ALBUMS: AlbumData[] = [
+  {
+    id: "1",
+    Ruta: "SunsetSeason",
+    nombre: "Sunset Season",
+    yearMeta: "2019 · EP",
+    gradient: "from-[#1f4260] to-[#0e1d30]",
+    shineAsset: "/figma-assets/shine-sunset.svg",
+    imagenReal: "/SunsetSeason.png",
+    tracks: [
+      { id: 1, title: "Idle Town", duration: "3:58" },
+      { id: 2, title: "Generation Why", duration: "3:40" },
+      { id: 3, title: "Crush Culture", duration: "3:24" },
+      { id: 4, title: "Greek God", duration: "3:56" },
+      { id: 5, title: "Lookalike", duration: "3:41" },
+    ],
+  },
+  {
+    id: "2",
+    Ruta: "KidKrow",
+    nombre: "Kid Krow",
+    yearMeta: "2020 · Álbum",
+    gradient: "from-[#162032] to-[#2b3b52]",
+    shineAsset: "/figma-assets/shine-kidkrow.svg",
+    imagenReal: "/KidKrow.png",
+    tracks: [
+      { id: 1, title: "Comfort Crowd", duration: "2:54" },
+      { id: 2, title: "Wish You Were Sober", duration: "2:48" },
+      { id: 3, title: "Maniac", duration: "3:05" },
+      { id: 4, title: "Checkmate", duration: "2:28" },
+      { id: 5, title: "Heather", duration: "3:18" },
+    ],
+  },
+  {
+    id: "3",
+    Ruta: "Superache",
+    nombre: "Superache",
+    yearMeta: "2022 · Álbum",
+    gradient: "from-[#223a4f] to-[#0b1522]",
+    shineAsset: "/figma-assets/shine-superache.svg",
+    imagenReal: "/Superache.png",
+    tracks: [
+      { id: 1, title: "Movies", duration: "3:34" },
+      { id: 2, title: "People Watching", duration: "2:38" },
+      { id: 3, title: "Disaster", duration: "2:33" },
+      { id: 4, title: "Best Friend", duration: "2:28" },
+      { id: 5, title: "Memories", duration: "4:08" },
+    ],
+  },
+  {
+    id: "4",
+    Ruta: "FoundHeaven",
+    nombre: "Found Heaven",
+    yearMeta: "2024 · Álbum",
+    gradient: "from-[#2c5470] to-[#10243a]",
+    shineAsset: "/figma-assets/shine-foundheaven.svg",
+    imagenReal: "/FoundHeaven.png",
+    tracks: [
+      { id: 1, title: "Found Heaven", duration: "2:57" },
+      { id: 2, title: "Never Ending Song", duration: "2:35" },
+      { id: 3, title: "Fainted Love", duration: "2:50" },
+      { id: 4, title: "Lonely Dancers", duration: "2:29" },
+      { id: 5, title: "Alley Rose", duration: "3:28" },
+    ],
+  },
+  {
+    id: "5",
+    Ruta: "Wishbone",
+    nombre: "Wishbone",
+    yearMeta: "2025 · Álbum",
+    gradient: "from-[#1a3a52] to-[#09101a]",
+    shineAsset: "/figma-assets/shine-wishbone.svg",
+    imagenReal: "/Wishbone.png",
+    tracks: [
+      { id: 1, title: "Pista de ejemplo 1", duration: "3:15" },
+      { id: 2, title: "Pista de ejemplo 2", duration: "3:34" },
+      { id: 3, title: "Pista de ejemplo 3", duration: "3:02" },
+      { id: 4, title: "Pista de ejemplo 4", duration: "4:01" },
+      { id: 5, title: "Pista de ejemplo 5", duration: "3:23" },
+      { id: 6, title: "Pista de ejemplo 6", duration: "3:48" },
+      { id: 7, title: "Pista de ejemplo 7", duration: "2:56" },
+      { id: 8, title: "Pista de ejemplo 8", duration: "4:12" },
+    ],
+  },
+];
 
 export default function Home() {
-  const albums = [
-    {
-      id: "1",
-      Ruta: "SunsetSeason",
-      imagen: "/SunsetSeason.png",
-      nombre: "Sunset Season",
-    },
-    { id: "2", Ruta: "KidKrow", imagen: "/KidKrow.png", nombre: "Kid Krow" },
-    {
-      id: "3",
-      Ruta: "Superache",
-      imagen: "/Superache.png",
-      nombre: "Superache",
-    },
-    {
-      id: "4",
-      Ruta: "FoundHeaven",
-      imagen: "/FoundHeaven.png",
-      nombre: "Found Heaven",
-    },
-    { id: "5", Ruta: "Wishbone", imagen: "/Wishbone.png", nombre: "Wishbone" },
-  ];
+  const [selectedAlbum, setSelectedAlbum] = useState<AlbumData>(INITIAL_ALBUMS[4]); // Wishbone selected by default as in Figma
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [savedTrackIds, setSavedTrackIds] = useState<Set<number>>(new Set([2]));
+  const [showLeftFade, setShowLeftFade] = useState(false);
+  const [showRightFade, setShowRightFade] = useState(false);
 
-  const linkButton = [
-    "https://open.spotify.com/intl-es/album/01FqYKXIKnGNh2dqdB4fjD?si=03mSPJcxRiWJvIJ1hx377A",
-  ];
-  const contenido = "Listen Now";
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+
+    const updateFadeVisibility = () => {
+      const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+      setShowLeftFade(carousel.scrollLeft > 0);
+      setShowRightFade(carousel.scrollLeft < maxScrollLeft - 1);
+    };
+
+    updateFadeVisibility();
+    carousel.addEventListener("scroll", updateFadeVisibility, { passive: true });
+    window.addEventListener("resize", updateFadeVisibility);
+
+    const resizeObserver = new ResizeObserver(updateFadeVisibility);
+    resizeObserver.observe(carousel);
+
+    return () => {
+      carousel.removeEventListener("scroll", updateFadeVisibility);
+      window.removeEventListener("resize", updateFadeVisibility);
+      resizeObserver.disconnect();
+    };
+  }, []);
+
+  const tracks = useMemo(() => {
+    return (
+      selectedAlbum.tracks || [
+        { id: 1, title: "Pista de ejemplo 1", duration: "3:15" },
+        { id: 2, title: "Pista de ejemplo 2", duration: "3:34" },
+        { id: 3, title: "Pista de ejemplo 3", duration: "3:02" },
+        { id: 4, title: "Pista de ejemplo 4", duration: "4:01" },
+        { id: 5, title: "Pista de ejemplo 5", duration: "3:23" },
+        { id: 6, title: "Pista de ejemplo 6", duration: "3:48" },
+        { id: 7, title: "Pista de ejemplo 7", duration: "2:56" },
+        { id: 8, title: "Pista de ejemplo 8", duration: "4:12" },
+      ]
+    );
+  }, [selectedAlbum]);
+
+  const currentTrack = tracks[currentTrackIndex] || tracks[0];
+
+  const handleToggleSave = (trackId: number) => {
+    setSavedTrackIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(trackId)) {
+        next.delete(trackId);
+      } else {
+        next.add(trackId);
+      }
+      return next;
+    });
+  };
+
+  const handlePlayTrack = (track: Track) => {
+    const idx = tracks.findIndex((t) => t.id === track.id);
+    if (idx !== -1) {
+      setCurrentTrackIndex(idx);
+      setIsPlaying(true);
+    }
+  };
+
+  const handlePrevTrack = () => {
+    setCurrentTrackIndex((prev) => (prev > 0 ? prev - 1 : tracks.length - 1));
+    setIsPlaying(true);
+  };
+
+  const handleNextTrack = () => {
+    setCurrentTrackIndex((prev) => (prev < tracks.length - 1 ? prev + 1 : 0));
+    setIsPlaying(true);
+  };
+
+  const scrollCarousel = (direction: "left" | "right") => {
+    const carousel = carouselRef.current;
+    const firstCard = carousel?.firstElementChild;
+    if (!carousel || !firstCard) return;
+
+    const secondCard = firstCard.nextElementSibling;
+    const cardStep = secondCard
+      ? secondCard.getBoundingClientRect().left -
+        firstCard.getBoundingClientRect().left
+      : firstCard.getBoundingClientRect().width;
+
+    carousel.scrollBy({
+      left: direction === "left" ? -cardStep : cardStep,
+      behavior: "smooth",
+    });
+  };
+
   return (
-    <>
-      <header className="relative h-[90vh] w-full bg-[url('/wishbonedelux.jpg')] bg-cover bg-center">
-        <NavBar />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-white">
-          <h1 className="text-[50px] text-brand-dark">Wishbone Deluxe</h1>
-          <h2 className="text-[30px] text-brand">out now!!</h2>
-          <ButtonLink linkButton={linkButton[0]} contenido={contenido} />
-        </div>
-      </header>
+    <div className="relative min-h-screen w-full bg-[#09101a] text-[#f0f4f8] overflow-x-hidden selection:bg-[#457490]/30 selection:text-white">
+      {/* Navbar con contador interactivo de Guardados */}
+      <NavBar savedCount={savedTrackIds.size} />
 
-      <main>
-        <section className="my-[60px] mx-2.5 text-center text-white">
-          <h2 className="text-[30px] text-white md:text-[40px] mb-10">
-            Albums
-          </h2>
-          <div
-            id="AlbumsContainer"
-            className="ml-5 my-5 flex flex-nowrap flex-row items-center gap-10 overflow-x-auto scrollbar-hide md:justify-center"
-          >
-            {albums.map((album) => (
-              <AlbumsTarjeta
-                key={album.id}
-                id={album.id}
-                Ruta={album.Ruta}
-                imagen={album.imagen}
-                nombre={album.nombre}
+      {/* Hero Section */}
+      <section className="relative h-[560px] w-full overflow-hidden">
+        {/* Imagen de fondo real wishbonedelux.jpg */}
+        <div className="absolute inset-0 bg-[url('/wishbonedelux.jpg')] bg-cover bg-center" />
+
+        {/* Degradados cinematográficos para fusionar con el fondo oscuro y resaltar la tipografía */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#09101a]/95 via-[#09101a]/70 via-55% to-[#09101a]/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#09101a] via-[#09101a]/30 via-40% to-[#09101a]/40" />
+
+        {/* Texto del Hero */}
+        <div className="relative z-10 mx-auto flex h-full max-w-[1440px] flex-col justify-center px-6 sm:px-10 lg:px-[160px]">
+          <div className="flex max-w-[760px] flex-col items-start gap-[14px]">
+            <p className="text-[12px] font-semibold tracking-[2.64px] uppercase text-[#457490]">
+              NUEVO LANZAMIENTO
+            </p>
+            <h1 className="font-serif text-5xl sm:text-7xl lg:text-[104px] font-bold leading-[0.95] text-[#f0f4f8] tracking-tight drop-shadow-md">
+              Wishbone Deluxe
+            </h1>
+            <p className="font-serif text-2xl sm:text-[28px] italic font-normal text-[#f0f4f8] opacity-90 drop-shadow-sm">
+              out now!!
+            </p>
+            <div className="pt-2">
+              <ButtonLink
+                linkButton="https://open.spotify.com/intl-es/album/01FqYKXIKnGNh2dqdB4fjD?si=03mSPJcxRiWJvIJ1hx377A"
+                contenido="Listen Now"
+                icon="/figma-assets/hero-play.svg"
+                onClick={() => {
+                  handlePlayTrack(tracks[0]);
+                }}
               />
-            ))}
-          </div>
-        </section>
-        <section className="my-[60px] mx-2.5 text-center text-white">
-          <h2 className="text-[30px] text-white">Singles</h2>
-          <div id="SinglesContainer" className="mx-5 my-5 flex flex-row gap-5">
-            <div
-              id="Single"
-              className="h-[200px] w-full rounded-[10px] flex flex-col items-center justify-center"
-            >
-              <img src="/Wishbone.png" alt="Wishbone" className="w-[200px]" />
-              <h3>Wishbone</h3>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Contenido Principal */}
+      <main className="mx-auto flex max-w-[1440px] flex-col gap-[56px] px-6 sm:px-10 lg:px-[160px] pt-[56px] pb-[160px]">
+        {/* Sección Albums */}
+        <section
+          id="albums"
+          aria-labelledby="albums-heading"
+          className="flex scroll-mt-[85px] flex-col gap-[24px]"
+        >
+          <div className="flex items-center justify-between">
+            <h2
+              id="albums-heading"
+              className="font-serif text-3xl sm:text-[40px] font-medium text-[#f0f4f8]"
+            >
+              Albums
+            </h2>
+            <div className="flex items-center gap-[10px]">
+              <button
+                type="button"
+                onClick={() => scrollCarousel("left")}
+                disabled={!showLeftFade}
+                className={`flex size-[40px] items-center justify-center rounded-full border border-[#8da3b5]/40 bg-[#162032] transition-all ${
+                  !showLeftFade
+                    ? "opacity-35 cursor-not-allowed"
+                    : "md:hover:bg-white/10 active:scale-95 cursor-pointer"
+                }`}
+                aria-label="Álbum anterior"
+              >
+                <div className="relative size-[18px]">
+                  <Image
+                    src="/figma-assets/arrow-left.svg"
+                    alt=""
+                    width={18}
+                    height={18}
+                    className="size-full object-contain"
+                  />
+                </div>
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollCarousel("right")}
+                disabled={!showRightFade}
+                className={`flex size-[40px] items-center justify-center rounded-full border border-[#8da3b5]/40 bg-[#162032] transition-all ${
+                  !showRightFade
+                    ? "opacity-35 cursor-not-allowed"
+                    : "md:hover:bg-white/10 active:scale-95 cursor-pointer"
+                }`}
+                aria-label="Álbum siguiente"
+              >
+                <div className="relative size-[18px]">
+                  <Image
+                    src="/figma-assets/arrow-right.svg"
+                    alt=""
+                    width={18}
+                    height={18}
+                    className="size-full object-contain"
+                  />
+                </div>
+              </button>
+            </div>
+          </div>
+
+          {/* Carrusel de Álbumes */}
+          <div className="relative">
+            <div
+              ref={carouselRef}
+              className="flex snap-x snap-mandatory items-start gap-[20px] overflow-x-auto scrollbar-hide pb-2"
+            >
+              {INITIAL_ALBUMS.map((album) => (
+                <AlbumsTarjeta
+                  key={album.id}
+                  album={album}
+                  onSelect={(alb) => {
+                    setSelectedAlbum(alb);
+                    setCurrentTrackIndex(0);
+                  }}
+                />
+              ))}
+              <div
+                aria-hidden="true"
+                className="w-[max(0px,calc(100%-228px))] shrink-0"
+              />
+            </div>
+            {showLeftFade && (
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-[#09101a] to-transparent"
+              />
+            )}
+            {showRightFade && (
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-[#09101a] to-transparent"
+              />
+            )}
+          </div>
         </section>
+
+        {/* Sección Singles */}
+        <section
+          id="singles"
+          aria-labelledby="singles-heading"
+          className="flex scroll-mt-[85px] flex-col gap-[24px]"
+        >
+          <div className="flex items-center justify-between">
+            <h2
+              id="singles-heading"
+              className="font-serif text-3xl sm:text-[40px] font-medium text-[#f0f4f8]"
+            >
+              Singles
+            </h2>
+          </div>
+          <div>
+            <SingleCard
+              title="Wishbone"
+              type="Single"
+              coverTitle="Wishbone"
+              imageSrc="/Wishbone.png"
+              shineAsset="/figma-assets/shine-single.svg"
+              onClick={() => {
+                setSelectedAlbum(INITIAL_ALBUMS[4]);
+                handlePlayTrack(INITIAL_ALBUMS[4].tracks![0]);
+              }}
+            />
+          </div>
+        </section>
+
+        {/* Sección Tracklist */}
+        <section
+          id="tracklist"
+          aria-labelledby="tracklist-heading"
+          className="flex flex-col gap-[14px]"
+        >
+          {/* Encabezado Tracklist */}
+          <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-transparent pb-2">
+            <h2
+              id="tracklist-heading"
+              className="font-serif text-3xl sm:text-[40px] font-medium text-[#f0f4f8]"
+            >
+              {selectedAlbum.nombre === "Wishbone"
+                ? "Wishbone Deluxe"
+                : selectedAlbum.nombre}
+            </h2>
+            <span className="text-[13px] font-normal text-[#8da3b5]">
+              {tracks.length} pistas · 28 min
+            </span>
+          </div>
+
+          {/* Espacio Figma */}
+          <div className="h-2" />
+
+          {/* Cabecera Tabla */}
+          <div className="flex items-center gap-[12px] border-b border-[#8da3b5]/20 px-[14px] pt-[10px] pb-[12px] text-[12px] font-normal tracking-[1.44px] uppercase text-[#8da3b5]">
+            <span className="w-[44px] text-center">#</span>
+            <span className="flex-1">TÍTULO</span>
+            <span className="w-[90px] text-right">DURACIÓN</span>
+            <span className="w-[36px]" />
+          </div>
+
+          {/* Filas de pistas */}
+          <div className="flex flex-col gap-1" role="table">
+            {tracks.map((track) => {
+              const isActive = track.id === currentTrack.id;
+              const isSaved = savedTrackIds.has(track.id);
+              return (
+                <TrackRow
+                  key={track.id}
+                  track={track}
+                  isActive={isActive}
+                  isSaved={isSaved}
+                  onPlay={handlePlayTrack}
+                  onToggleSave={handleToggleSave}
+                />
+              );
+            })}
+          </div>
+
+          {/* Nota descriptiva Figma */}
+          <p className="pt-2 text-[12px] font-normal text-[#8da3b5]">
+            Las pistas son datos de ejemplo. Conecta tu lista real (por ejemplo desde Supabase) para reemplazarlas.
+          </p>
+        </section>
+
+        {/* Footer */}
+        <footer className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-[#8da3b5]/20 pt-[24px] text-[13px] font-normal text-[#8da3b5]">
+          <div className="flex items-center gap-3">
+            <Image
+              src="/Logo.png"
+              alt="Conan Gray"
+              width={28}
+              height={28}
+              className="object-contain opacity-75"
+            />
+            <p>Conan Gray</p>
+          </div>
+          <p className="flex gap-2">
+            <span>Home</span>
+            <span>·</span>
+            <span>Music</span>
+            <span>·</span>
+            <span>Tour</span>
+            <span>·</span>
+            <span>Merch</span>
+          </p>
+        </footer>
       </main>
-      <footer></footer>
-    </>
+
+      {/* Reproductor Flotante Inferior */}
+      <Reproductor
+        currentTrack={currentTrack}
+        albumName={
+          selectedAlbum.nombre === "Wishbone"
+            ? "Wishbone Deluxe"
+            : selectedAlbum.nombre
+        }
+        albumCover={selectedAlbum.imagenReal}
+        isPlaying={isPlaying}
+        isSaved={savedTrackIds.has(currentTrack.id)}
+        onTogglePlay={() => setIsPlaying((p) => !p)}
+        onPrev={handlePrevTrack}
+        onNext={handleNextTrack}
+        onToggleSave={() => handleToggleSave(currentTrack.id)}
+      />
+    </div>
   );
 }

@@ -1,17 +1,48 @@
 "use client";
 
+import Image from "next/image";
+
 type Props = {
   linkButton: string;
   contenido: string;
+  icon?: string;
+  className?: string;
+  onClick?: () => void;
 };
 
-export default function ButtonLink({ linkButton, contenido }: Props) {
+export default function ButtonLink({
+  linkButton,
+  contenido,
+  icon = "/figma-assets/hero-play.svg",
+  className = "",
+  onClick,
+}: Props) {
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    } else if (linkButton) {
+      window.open(linkButton, "_blank");
+    }
+  };
+
   return (
     <button
-      onClick={() => window.open(linkButton, "_blank")}
-      className="cursor-pointer rounded-[25px] border-none bg-brand px-5 py-2.5 text-lg text-white transition-colors duration-300 hover:bg-brand-dark"
+      type="button"
+      onClick={handleClick}
+      className={`group cursor-pointer rounded-full bg-[#457490] px-[26px] py-[14px] text-[15px] font-semibold text-[#09101a] transition-all duration-200 md:hover:brightness-110 active:scale-95 shadow-[0_4px_20px_rgba(69,116,144,0.35)] flex items-center justify-center gap-[10px] ${className}`}
     >
-      {contenido}
+      {icon && (
+        <div className="relative size-[16px] shrink-0 transition-transform duration-200 md:group-hover:scale-110">
+          <Image
+            src={icon}
+            alt=""
+            width={16}
+            height={16}
+            className="size-full object-contain"
+          />
+        </div>
+      )}
+      <span>{contenido}</span>
     </button>
   );
 }

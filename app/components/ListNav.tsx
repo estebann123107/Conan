@@ -48,10 +48,10 @@ export const DesktopNavLinks: FC<Pick<Props, "data">> = ({ data }) => (
       <li key={elemento}>
         <Link
           href={elemento === "Home" ? "/" : `/${elemento.toLowerCase()}`}
-          className="group relative py-1 text-base lg:text-lg font-medium text-white/90 no-underline transition-colors duration-200 hover:text-white"
+          className="group relative py-1 text-base lg:text-lg font-medium text-white/90 no-underline transition-colors duration-200 md:hover:text-white"
         >
           <span>{elemento}</span>
-          <span className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-brand transition-all duration-300 ease-out group-hover:w-full" />
+          <span className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-brand transition-all duration-300 ease-out md:group-hover:w-full" />
         </Link>
       </li>
     ))}
@@ -94,11 +94,11 @@ export const MobileNavMenu: FC<Props> = ({ data, isOpen, onClose }) => {
               >
                 <Link
                   href={elemento === "Home" ? "/" : `/${elemento.toLowerCase()}`}
-                  className="group flex items-center justify-between rounded-xl px-3.5 py-2.5 text-sm font-medium text-white/90 no-underline transition-all duration-200 hover:bg-white/10 hover:text-white hover:translate-x-1 active:scale-[0.98]"
+                  className="group flex items-center justify-between rounded-xl px-3.5 py-2.5 text-sm font-medium text-white/90 no-underline transition-all duration-200 md:hover:bg-white/10 md:hover:text-white md:hover:translate-x-1 active:scale-[0.98]"
                   onClick={onClose}
                 >
                   <span>{elemento}</span>
-                  <span className="text-white/40 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-white/80">
+                  <span className="text-white/40 transition-transform duration-200 md:group-hover:translate-x-0.5 md:group-hover:text-white/80">
                     &rarr;
                   </span>
                 </Link>
@@ -113,10 +113,10 @@ export const MobileNavMenu: FC<Props> = ({ data, isOpen, onClose }) => {
             >
               <Link
                 href="/login"
-                className="group flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm font-medium text-white/90 no-underline transition-all duration-200 hover:bg-white/10 hover:text-white hover:translate-x-1 active:scale-[0.98]"
+                className="group flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm font-medium text-white/90 no-underline transition-all duration-200 md:hover:bg-white/10 md:hover:text-white md:hover:translate-x-1 active:scale-[0.98]"
                 onClick={onClose}
               >
-                <LoginIcon className="h-4 w-4 text-white/70 transition-colors group-hover:text-white" />
+                <LoginIcon className="h-4 w-4 text-white/70 transition-colors md:group-hover:text-white" />
                 <span>Iniciar sesión</span>
               </Link>
             </li>
@@ -126,10 +126,10 @@ export const MobileNavMenu: FC<Props> = ({ data, isOpen, onClose }) => {
             >
               <Link
                 href="/register"
-                className="group flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm font-medium text-brand-light no-underline transition-all duration-200 hover:bg-brand/20 hover:text-white hover:translate-x-1 active:scale-[0.98]"
+                className="group flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm font-medium text-brand-light no-underline transition-all duration-200 md:hover:bg-brand/20 md:hover:text-white md:hover:translate-x-1 active:scale-[0.98]"
                 onClick={onClose}
               >
-                <RegisterIcon className="h-4 w-4 text-brand-light transition-colors group-hover:text-white" />
+                <RegisterIcon className="h-4 w-4 text-brand-light transition-colors md:group-hover:text-white" />
                 <span>Registrarse</span>
               </Link>
             </li>
